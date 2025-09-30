@@ -1,0 +1,21 @@
+Break for time or iteration limit reached.
+Total runtime 50 and time 0.9536428451538086 seconds.
+
+[31m[1mType Error:[0m [1mDouble slash in concatenated path[0m
+[90m     →[0m cmake_projects/kudu/CMakeLists.txt:537:20
+[90m     │[0m
+[90m 537 │[0m    [94m[1mset[0m[34m([0m[97m[3mTEST_PATH[0m [2m"[0m[95m$[0m[95m{[0m[97m[3mEXECUTABLE_OUTPUT_PATH[0m[95m}[0m[36m/[0m[95m$[0m[95m{[0m[97m[3mTEST_NAME[0m[95m}[0m[2m"[0m[34m)[0m
+[90m[2m[0m[90m     │[0m    [0m               [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mMissing slash between path prefix and relative path[0m
+[90m    →[0m cmake_projects/kudu/src/kudu/codegen/CMakeLists.txt:77:19
+[90m    │[0m
+[90m 77 │[0m    [94m[1mset[0m[34m([0m[97m[3mIR_OUTPUT_ELF[0m [95m$[0m[95m{[0m[97m[3mIR_OUTPUT[0m[95m}[0m[36m.o[0m[34m)[0m
+[90m[2m[0m[90m    │[0m    [0m                  [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mDouble slash in concatenated path[0m
+[90m    →[0m cmake_projects/kudu/src/kudu/codegen/CMakeLists.txt:76:15
+[90m    │[0m
+[90m 76 │[0m    [94m[1mset[0m[34m([0m[97m[3mIR_OUTPUT[0m [95m$[0m[95m{[0m[97m[3mBUILD_OUTPUT_ROOT_DIRECTORY[0m[95m}[0m[36m/precompiled.ll[0m[34m)[0m
+[90m[2m[0m[90m    │[0m    [0m              [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+

@@ -1,0 +1,14 @@
+Total runtime 14 and time 0.03241157531738281 seconds.
+
+[31m[1mType Error:[0m [1mDouble slash in concatenated path[0m
+[90m    →[0m cmake_projects/obs-chapter-marker-manager/CMakeLists.txt:91:17
+[90m    │[0m
+[90m 91 │[0m    [94m[1mDESTINATION[0m [95m$[0m[95m{[0m[97m[3mCMAKE_INSTALL_PREFIX[0m[95m}[0m[36m/[0m[95m$[0m[95m{[0m[97m[3mDATA_OUT_DIR[0m[95m}[0m[34m)[0m
+[90m[2m[0m[90m    │[0m    [0m            [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mDouble slash in concatenated path[0m
+[90m    →[0m cmake_projects/obs-chapter-marker-manager/CMakeLists.txt:89:25
+[90m    │[0m
+[90m 89 │[0m    [94m[1mLIBRARY[0m [94m[1mDESTINATION[0m [95m$[0m[95m{[0m[97m[3mCMAKE_INSTALL_PREFIX[0m[95m}[0m[36m/[0m[95m$[0m[95m{[0m[97m[3mLIB_OUT_DIR[0m[95m}[0m[34m)[0m
+[90m[2m[0m[90m    │[0m    [0m                    [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+

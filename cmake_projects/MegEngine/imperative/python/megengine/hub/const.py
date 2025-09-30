@@ -1,0 +1,10 @@
+# -*- coding: utf-8 -*-
+DEFAULT_BRANCH_NAME = "master"
+HUBCONF = "hubconf.py"
+HUBDEPENDENCY = "dependencies"
+DEFAULT_GIT_HOST = "github.com"
+ENV_MGE_HOME = "MGE_HOME"
+ENV_XDG_CACHE_HOME = "XDG_CACHE_HOME"
+DEFAULT_CACHE_DIR = "~/.cache"
+DEFAULT_PROTOCOL = "HTTPS"
+HTTP_READ_TIMEOUT = 120

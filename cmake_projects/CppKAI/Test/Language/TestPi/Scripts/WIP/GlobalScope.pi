@@ -1,0 +1,19 @@
+
+
+pwd drop
+
+'/ cd
+
+pwd '/ == assert
+
+1 'a #
+2 'b #
+
+a b + 3 == assert
+
+'/home cd
+3 'c #
+
+// Commenting out invalid pathname reference that causes errors
+// /a c + 4 == assert
+

@@ -1,0 +1,15 @@
+# Build
+build/
+output/
+
+# Cache
+__pycache__/
+.ccls-cache/
+
+# Editor and IDE Config
+.vscode/
+.vs/
+.idea/
+
+# CMake
+compile_commands.json

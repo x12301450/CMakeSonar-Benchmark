@@ -1,0 +1,20 @@
+Total runtime 2 and time 0.031131982803344727 seconds.
+
+[31m[1mType Error:[0m [1mMissing slash between path prefix and relative path[0m
+[90m    →[0m cmake_projects/vision_kit/CMakeLists.txt:48:29
+[90m    │[0m
+[90m 48 │[0m    [94m[1mset[0m[34m([0m[97m[3mOpticalflow_INCLUDE_DIR[0m [95m$[0m[95m{[0m[97m[3mPROJECT_SOURCE_DIR[0m[95m}[0m[36mmodule/opticalflow/include[0m[34m)[0m
+[90m[2m[0m[90m    │[0m    [0m                            [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mMissing slash between path prefix and relative path[0m
+[90m    →[0m cmake_projects/vision_kit/CMakeLists.txt:52:35
+[90m    │[0m
+[90m 52 │[0m    [94m[1mset[0m[34m([0m[97m[3mEpipolar_Geometry_INCLUDE_DIR[0m [95m$[0m[95m{[0m[97m[3mPROJECT_SOURCE_DIR[0m[95m}[0m[36mmodule/epipolar_geometry/include[0m[34m)[0m
+[90m[2m[0m[90m    │[0m    [0m                                  [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mMissing slash between path prefix and relative path[0m
+[90m    →[0m cmake_projects/vision_kit/CMakeLists.txt:56:27
+[90m    │[0m
+[90m 56 │[0m    [94m[1mset[0m[34m([0m[97m[3mAlignment_INCLUDE_DIR[0m [95m$[0m[95m{[0m[97m[3mPROJECT_SOURCE_DIR[0m[95m}[0m[36mmodule/alignment/include[0m[34m)[0m
+[90m    │[0m    [0m                          [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+

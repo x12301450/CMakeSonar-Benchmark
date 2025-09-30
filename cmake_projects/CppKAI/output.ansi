@@ -1,0 +1,21 @@
+Break for time or iteration limit reached.
+Total runtime 50 and time 0.4071958065032959 seconds.
+
+[31m[1mType Error:[0m [1mDouble slash in concatenated path[0m
+[90m     →[0m cmake_projects/CppKAI/Test/Language/CMakeLists.txt:193:31
+[90m     │[0m
+[90m 193 │[0m    [94m[1mfile[0m[34m([0m[94m[1mGLOB_RECURSE[0m [97m[3mscripts[0m [95m$[0m[95m{[0m[97m[3mscript_path[0m[95m}[0m[36m/*.[0m[95m$[0m[95m{[0m[97m[3mext[0m[95m}[0m[34m)[0m
+[90m[2m[0m[90m     │[0m    [0m                          [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mMissing slash between path prefix and relative path[0m
+[90m    →[0m cmake_projects/CppKAI/Test/Language/CMakeLists.txt:16:14
+[90m    │[0m
+[90m 16 │[0m    [94m[1mset[0m[34m([0m[97m[3mhome[0m [95m$[0m[95m{[0m[97m[3mTEST_HOME[0m[95m}[0m[36m/Language/Test[0m[95m$[0m[95m{[0m[97m[3mlang[0m[95m}[0m[34m)[0m
+[90m[2m[0m[90m    │[0m    [0m         [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mMissing slash between path prefix and relative path[0m
+[90m    →[0m cmake_projects/CppKAI/Test/Language/CMakeLists.txt:19:21
+[90m    │[0m
+[90m 19 │[0m    [94m[1mset[0m[34m([0m[97m[3mscript_path[0m [95m$[0m[95m{[0m[97m[3mTEST_HOME[0m[95m}[0m[36m/Language/Test[0m[95m$[0m[95m{[0m[97m[3mlang[0m[95m}[0m[36m/Scripts/[0m[34m)[0m
+[90m[2m[0m[90m    │[0m    [0m                [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+

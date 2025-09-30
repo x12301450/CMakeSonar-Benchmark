@@ -1,0 +1,9 @@
+Break for time or iteration limit reached.
+Total runtime 50 and time 0.18554449081420898 seconds.
+
+[31m[1mType Error:[0m [1mStringFlag UnionType[0m
+[90m     →[0m cmake_projects/wxLauncher/CMakeLists.txt:124:25
+[90m     │[0m
+[90m 124 │[0m    [94m[1mset[0m[34m([0m[97m[3mHELP_HTB_LOCATION[0m [95m$[0m[95m{[0m[97m[3mRESOURCES_PATH[0m[95m}[0m[36m/onlinehelp.htb[0m[34m)[0m
+[90m[2m[0m[90m     │[0m    [0m                      [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+

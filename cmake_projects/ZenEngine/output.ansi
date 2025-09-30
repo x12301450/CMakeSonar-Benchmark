@@ -1,0 +1,33 @@
+Break for time or iteration limit reached.
+Total runtime 50 and time 0.12067985534667969 seconds.
+
+[31m[1mType Error:[0m [1mDouble slash in concatenated path[0m
+[90m     →[0m cmake_projects/ZenEngine/ZenCore/CMakeLists.txt:262:16
+[90m     │[0m
+[90m 262 │[0m    [94m[1mset[0m[34m([0m[97m[3mSPIRV[0m [2m"[0m[95m$[0m[95m{[0m[97m[3mSHADER_SPV_PATH[0m[95m}[0m[36m/[0m[95m$[0m[95m{[0m[97m[3mRELATIVE_FILE_PATH[0m[95m}[0m[36m/[0m[95m$[0m[95m{[0m[97m[3mFILE_NAME[0m[95m}[0m[36m.[0m[36ms[0m[36mp[0m[36mv[0m[2m"[0m[34m)[0m
+[90m[2m[0m[90m     │[0m    [0m           [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mDouble slash in concatenated path[0m
+[90m     →[0m cmake_projects/ZenEngine/ZenCore/CMakeLists.txt:250:6
+[90m     │[0m
+[90m 250 │[0m    [2m"[0m[95m$[0m[95m{[0m[97m[3mSHADER_SRC_PATH[0m[95m}[0m[36m/[0m[36m*[0m[36m.[0m[36mf[0m[36mr[0m[36ma[0m[36mg[0m[2m"[0m
+[90m[2m[0m[90m     │[0m    [0m [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mDouble slash in concatenated path[0m
+[90m     →[0m cmake_projects/ZenEngine/ZenCore/CMakeLists.txt:251:6
+[90m     │[0m
+[90m 251 │[0m    [2m"[0m[95m$[0m[95m{[0m[97m[3mSHADER_SRC_PATH[0m[95m}[0m[36m/[0m[36m*[0m[36m.[0m[36mv[0m[36me[0m[36mr[0m[36mt[0m[2m"[0m
+[90m[2m[0m[90m     │[0m    [0m [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mDouble slash in concatenated path[0m
+[90m     →[0m cmake_projects/ZenEngine/ZenCore/CMakeLists.txt:252:6
+[90m     │[0m
+[90m 252 │[0m    [2m"[0m[95m$[0m[95m{[0m[97m[3mSHADER_SRC_PATH[0m[95m}[0m[36m/[0m[36m*[0m[36m.[0m[36mg[0m[36me[0m[36mo[0m[36mm[0m[2m"[0m
+[90m[2m[0m[90m     │[0m    [0m [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mDouble slash in concatenated path[0m
+[90m     →[0m cmake_projects/ZenEngine/ZenCore/CMakeLists.txt:253:6
+[90m     │[0m
+[90m 253 │[0m    [2m"[0m[95m$[0m[95m{[0m[97m[3mSHADER_SRC_PATH[0m[95m}[0m[36m/[0m[36m*[0m[36m.[0m[36mc[0m[36mo[0m[36mm[0m[36mp[0m[2m"[0m
+[90m[2m[0m[90m     │[0m    [0m [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+

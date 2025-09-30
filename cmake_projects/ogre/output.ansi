@@ -1,0 +1,21 @@
+Break for time or iteration limit reached.
+Total runtime 50 and time 10.169596672058105 seconds.
+
+[31m[1mType Error:[0m [1mDouble slash in concatenated path[0m
+[90m   →[0m cmake_projects/ogre/Samples/Emscripten/CMakeLists.txt:4:29
+[90m   │[0m
+[90m 4 │[0m    [94m[1mset[0m[34m([0m[97m[3mCMAKE_EXE_LINKER_FLAGS[0m [2m"[0m[36m-[0m[36m-[0m[36mp[0m[36mr[0m[36me[0m[36ml[0m[36mo[0m[36ma[0m[36md[0m[36m-[0m[36mf[0m[36mi[0m[36ml[0m[36me[0m[36m[2m␣[0m[95m$[0m[95m{[0m[97m[3mMEDIA_DIR[0m[95m}[0m[36m/[0m[36m@[0m[36m.[0m[36m[2m␣[0m[36m-[0m[36ms[0m[36m[2m␣[0m[36mE[0m[36mX[0m[36mP[0m[36mO[0m[36mR[0m[36mT[0m[36mE[0m[36mD[0m[36m_[0m[36mF[0m[36mU[0m[36mN[0m[36mC[0m[36mT[0m[36mI[0m[36mO[0m[36mN[0m[36mS[0m[36m=[0m[96m[1m\[0m[96m[1m"[0m[36m[[0m[36m[2m␣[0m[36m'[0m[36m_[0m[36mp[0m[36ma[0m[36ms[0m[36ms[0m[36mA[0m[36ms[0m[36ms[0m[36me[0m[36mt[0m[36mA[0m[36ms[0m[36mA[0m[36mr[0m[36mr[0m[36ma[0m[36my[0m[36mB[0m[36mu[0m[36mf[0m[36mf[0m[36me[0m[36mr[0m[36m'[0m[36m,[0m[36m[2m␣[0m[36m'[0m[36m_[0m[36mc[0m[36ml[0m[36me[0m[36ma[0m[36mr[0m[36mS[0m[36mc[0m[36me[0m[36mn[0m[36me[0m[36m'[0m[36m,[0m[36m[2m␣[0m[36m'[0m[36m_[0m[36mm[0m[36ma[0m[36mi[0m[36mn[0m[36m'[0m[36m][0m[96m[1m\[0m[96m[1m"[0m[36m[2m␣[0m[36m-[0m[36ms[0m[36m[2m␣[0m[36mU[0m[36mS[0m[36mE[0m[36m_[0m[36mS[0m[36mD[0m[36mL[0m[36m=[0m[36m2[0m[36m[2m␣[0m[36m-[0m[36ms[0m[36m[2m␣[0m[36mM[0m[36mA[0m[36mX[0m[36m_[0m[36mW[0m[36mE[0m[36mB[0m[36mG[0m[36mL[0m[36m_[0m[36mV[0m[36mE[0m[36mR[0m[36mS[0m[36mI[0m[36mO[0m[36mN[0m[36m=[0m[36m2[0m[2m"[0m[34m)[0m
+[90m[2m[0m[90m   │[0m    [0m                            [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mDouble slash in concatenated path[0m
+[90m    →[0m cmake_projects/ogre/Samples/Emscripten/CMakeLists.txt:29:18
+[90m    │[0m
+[90m 29 │[0m    [94m[1mDESTINATION[0m [2m"[0m[95m$[0m[95m{[0m[97m[3mMEDIA_DIR[0m[95m}[0m[36m/[0m[2m"[0m[34m)[0m
+[90m[2m[0m[90m    │[0m    [0m             [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mDouble slash in concatenated path[0m
+[90m    →[0m cmake_projects/ogre/Samples/Emscripten/CMakeLists.txt:33:18
+[90m    │[0m
+[90m 33 │[0m    [94m[1mDESTINATION[0m [2m"[0m[95m$[0m[95m{[0m[97m[3mMEDIA_DIR[0m[95m}[0m[36m/[0m[2m"[0m[34m)[0m
+[90m[2m[0m[90m    │[0m    [0m             [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^[0m[31m[2m[0m
+

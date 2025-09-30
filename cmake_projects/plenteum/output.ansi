@@ -1,0 +1,21 @@
+Break for time or iteration limit reached.
+Total runtime 50 and time 4.016537189483643 seconds.
+
+[31m[1mType Error:[0m [1mCan not concat absolute path after path[0m
+[90m     →[0m cmake_projects/plenteum/external/miniupnpc/CMakeLists.txt:133:53
+[90m     │[0m
+[90m 133 │[0m    [94m[1mtarget_include_directories[0m[34m([0m[36mupnpc-static[0m [94m[1mINTERFACE[0m [36m../[0m[95m$[0m[95m{[0m[97m[3mCMAKE_CURRENT_SOURCE_DIR[0m[95m}[0m[34m)[0m
+[90m[2m[0m[90m     │[0m    [0m                                                  [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mCan not concat absolute path after path[0m
+[90m     →[0m cmake_projects/plenteum/external/miniupnpc/CMakeLists.txt:111:53
+[90m     │[0m
+[90m 111 │[0m    [94m[1mtarget_include_directories[0m[34m([0m[36mupnpc-static[0m [94m[1mINTERFACE[0m [36m../[0m[95m$[0m[95m{[0m[97m[3mCMAKE_CURRENT_SOURCE_DIR[0m[95m}[0m[34m)[0m
+[90m[2m[0m[90m     │[0m    [0m                                                  [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mType 'List[AbsPath]' is not concatenatable with type 'String'[0m
+[90m    →[0m cmake_projects/plenteum/external/zstd/CMakeLists.txt:62:27
+[90m    │[0m
+[90m 62 │[0m    [94m[1mSET[0m[34m([0m[97m[3mMSVC_RESOURCE_DIR[0m [95m$[0m[95m{[0m[97m[3mSources[0m[95m}[0m[36m/build/VS2010/libzstd-dll[0m[34m)[0m
+[90m[2m[0m[90m    │[0m    [0m                      [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+

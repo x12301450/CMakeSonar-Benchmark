@@ -1,0 +1,4 @@
+# Copyright 2014 Cloudera, Inc.
+
+# Maven build artifacts
+dependency-reduced-pom.xml

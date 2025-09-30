@@ -1,0 +1,8 @@
+Total runtime 2 and time 0.057971954345703125 seconds.
+
+[31m[1mType Error:[0m [1mDouble slash in concatenated path[0m
+[90m    →[0m cmake_projects/Tempera/CMakeLists.txt:53:9
+[90m    │[0m
+[90m 53 │[0m    [95m$[0m[95m{[0m[97m[3mINCLUDE[0m[95m}[0m[36m/detours[0m[34m)[0m
+[90m[2m[0m[90m    │[0m    [0m[0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+

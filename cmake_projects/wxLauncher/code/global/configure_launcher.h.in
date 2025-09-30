@@ -1,0 +1,42 @@
+#ifndef CONFIGURE_LAUNCHER_H_
+#define CONFIGURE_LAUNCHER_H_
+// File is modified by the build system to tell the launcher where stuff
+// is located
+#cmakedefine RESOURCES_PATH "${RESOURCES_PATH}"
+#cmakedefine HELP_HTB_LOCATION "${HELP_HTB_LOCATION}"
+
+#cmakedefine01 USE_SPEECH
+#cmakedefine01 USE_JOYSTICK
+#cmakedefine01 USE_OPENAL
+#cmakedefine01 PLATFORM_USES_REGISTRY
+#cmakedefine01 PROFILE_DEBUGGING
+
+#cmakedefine01 HAS_SDL
+
+#cmakedefine wxlauncher_VERSION_MAJOR ${wxlauncher_VERSION_MAJOR}
+#cmakedefine wxlauncher_VERSION_MINOR ${wxlauncher_VERSION_MINOR}
+#cmakedefine wxlauncher_VERSION_PATCH ${wxlauncher_VERSION_PATCH}
+
+// If cmake did not define these, it means they are zero
+#ifndef wxlauncher_VERSION_MAJOR
+#define wxlauncher_VERSION_MAJOR 0
+#endif
+#ifndef wxlauncher_VERSION_MINOR
+#define wxlauncher_VERSION_MINOR 0
+#endif
+#ifndef wxlauncher_VERSION_PATCH
+#define wxlauncher_VERSION_PATCH 0
+#endif
+
+// What platform am I on
+#cmakedefine01 IS_WIN32
+#cmakedefine01 IS_LINUX
+#cmakedefine01 IS_APPLE
+
+#if (IS_WIN32 + IS_LINUX + IS_APPLE) > 1
+#error "Only one of IS_WIN32, IS_LINUX, and IS_APPLE may evaluate to true"
+#elif (IS_WIN32 + IS_LINUX + IS_APPLE) < 1
+#error "One of IS_WIN32, IS_LINUX, IS_APPLE must evaluate to true"
+#endif
+
+#endif

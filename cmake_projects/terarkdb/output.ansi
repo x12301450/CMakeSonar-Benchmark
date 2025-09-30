@@ -1,0 +1,9 @@
+Break for time or iteration limit reached.
+Total runtime 50 and time 0.649367094039917 seconds.
+
+[31m[1mType Error:[0m [1mRequired type 'Path[StartSlash(X), EndSlash(X)]', found 'List[AbsPath[StartSlash(1), EndSlash(0)]]'[0m
+[90m     →[0m cmake_projects/terarkdb/CMakeLists.txt:103:13
+[90m     │[0m
+[90m 103 │[0m    [94m[1mIF[0m[34m([0m[94m[1mEXISTS[0m [95m$[0m[95m{[0m[97m[3mZENFS_CMAKE_FILE[0m[95m}[0m[34m)[0m
+[90m[2m[0m[90m     │[0m    [0m          [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+

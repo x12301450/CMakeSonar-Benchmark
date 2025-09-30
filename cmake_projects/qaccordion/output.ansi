@@ -1,0 +1,38 @@
+Total runtime 22 and time 0.04491710662841797 seconds.
+
+[31m[1mType Error:[0m [1mStringFlag UnionType[0m
+[90m    →[0m cmake_projects/qaccordion/src/CMakeLists.txt:73:15
+[90m    │[0m
+[90m 73 │[0m    [94m[1minstall[0m[34m([0m[94m[1mFILES[0m [95m$[0m[95m{[0m[97m[3mbase_path[0m[95m}[0m[36m/include/qaccordion/qaccordion.hpp[0m
+[90m[2m[0m[90m    │[0m    [0m              [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mStringFlag UnionType[0m
+[90m    →[0m cmake_projects/qaccordion/src/CMakeLists.txt:71:15
+[90m    │[0m
+[90m 71 │[0m    [94m[1minstall[0m[34m([0m[94m[1mFILES[0m [95m$[0m[95m{[0m[97m[3mbase_path[0m[95m}[0m[36m/include/qaccordion/contentpane.hpp[0m
+[90m[2m[0m[90m    │[0m    [0m              [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mStringFlag UnionType[0m
+[90m    →[0m cmake_projects/qaccordion/src/CMakeLists.txt:69:15
+[90m    │[0m
+[90m 69 │[0m    [94m[1minstall[0m[34m([0m[94m[1mFILES[0m [95m$[0m[95m{[0m[97m[3mbase_path[0m[95m}[0m[36m/include/qaccordion/clickableframe.hpp[0m
+[90m[2m[0m[90m    │[0m    [0m              [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mStringFlag UnionType[0m
+[90m    →[0m cmake_projects/qaccordion/src/CMakeLists.txt:54:12
+[90m    │[0m
+[90m 54 │[0m    [94m[1mPUBLIC[0m [95m$[0m[95m{[0m[97m[3mbase_path[0m[95m}[0m[36m/include[0m
+[90m[2m[0m[90m    │[0m    [0m       [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mStringFlag UnionType[0m
+[90m    →[0m cmake_projects/qaccordion/src/CMakeLists.txt:37:31
+[90m    │[0m
+[90m 37 │[0m    [94m[1mset[0m[34m([0m[97m[3mQACCORDION_ICON_RESOURCE[0m [2m"[0m[95m$[0m[95m{[0m[97m[3mbase_path[0m[95m}[0m[36m/[0m[36mi[0m[36mc[0m[36mo[0m[36mn[0m[36ms[0m[36m/[0m[36mq[0m[36ma[0m[36mc[0m[36mc[0m[36mo[0m[36mr[0m[36md[0m[36mi[0m[36mo[0m[36mn[0m[36mi[0m[36mc[0m[36mo[0m[36mn[0m[36ms[0m[36m.[0m[36mq[0m[36mr[0m[36mc[0m[2m"[0m[34m)[0m
+[90m[2m[0m[90m    │[0m    [0m                              [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mStringFlag UnionType[0m
+[90m    →[0m cmake_projects/qaccordion/src/CMakeLists.txt:27:5
+[90m    │[0m
+[90m 27 │[0m    [95m$[0m[95m{[0m[97m[3mbase_path[0m[95m}[0m[36m/include/qaccordion/config.h.in[0m
+[90m[2m[0m[90m    │[0m    [0m[0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+

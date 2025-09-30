@@ -1,0 +1,751 @@
+/*
+    Copyright 2004-2008 TouK sp. z o.o. s.k.a.
+    
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License. */
+
+
+
+%%preamble
+
+#include "TextUtils.h"
+#include "TypeSystem.h"
+#include "xml-fragment.h"
+#include "defs.h"
+#include "Query.h"
+#include "BeansException.h"
+#include "Tracer.h"
+#include "XmlObjectDocument.h"
+#include "XmlCursor.h"
+
+#include <boost/date_time/posix_time/posix_time.hpp>
+
+namespace xmlbeansxx {
+std::string istreamToString(std::istream &in) {
+    std::string s,s2;
+    while (!in.eof()) {
+        in>>s2;
+        s+=s2;
+    }
+    return s;
+}
+
+class NoExchangeEntitiesXmlObject: public XmlObject {
+    public:
+    virtual std::string exchangeEntities(const std::string& str) const { return str; }
+};
+
+
+DECLARE_PTR_CODE(std::string,StringPtr,constStringPtr)
+
+
+XmlObject  Factory::_parse(std::istream &in,const xmlbeansxx::XmlOptions &options,const XmlObject & newInstance) {
+	xmlbeansxx::definitions::XmlFragmentDocument doc=xmlbeansxx::definitions::XmlFragmentDocument::Factory::newInstance();
+	doc.setXmlFragment(newInstance);
+	xmlbeansxx::XmlParserPtr p = xmlbeansxx::XmlParser::Factory::newInstance(options);
+	p->parse(in,doc);
+	return doc.getXmlFragment();
+}
+
+XmlObject  Factory::_documentParse(std::istream &in,const xmlbeansxx::XmlOptions &options) {
+	XmlObjectDocument doc;
+	xmlbeansxx::XmlParserPtr p = xmlbeansxx::XmlParser::Factory::newInstance(options);
+	p->parse(in,doc);
+	return doc;
+}
+
+
+}
+
+
+
+%%class xmlbeansxx::XmlObject
+XMLBEANSXX_LOGGER_PTR_SET(XmlObject::log,"xmlbeansxx.XmlObject");
+
+void XmlObject::setElement(const QName & name,const XmlObject &element,int index) 
+{
+	Contents::Walker::setElem(*this,name,element.contents,index);
+
+}
+void XmlObject::setAttribute(const QName & name,const XmlAnySimpleType &attribute ) 
+{
+	Contents::Walker::setAttr(*this,name,attribute.contents);
+}
+
+XmlCursor XmlObject::newCursor() {
+	return XmlCursor(*this);
+}
+
+void XmlObject::_setXmlObject(const xmlbeansxx::XmlObject& p, bool castTest, const char* toString) {
+  if(!castTest) {
+    throw xmlbeansxx::ClassCastException(p.getSchemaType()->className + " to " + toString);
+  }
+  swapContents(p.contents);
+}
+
+void XmlAnySimpleType::_setXmlObject(const xmlbeansxx::XmlObject& p, bool castTest, const char* toString) {
+  if(!castTest) {
+    if(xmlbeansxx::_cast_test<xmlbeansxx::XmlAnySimpleType>(p)) {
+      setSimpleContent(p.getSimpleContent()); 
+      return;
+    }  	
+    throw xmlbeansxx::ClassCastException(p.getSchemaType()->className + " to " + toString);
+  }
+  swapContents(p.contents);
+}
+
+
+void XmlObject::createContents()
+{
+	if(!contents){
+		contents = ContentsPtr(new Contents(getSchemaType()));
+	}
+}
+bool XmlObject::hasContents() const
+{
+	return contents!=NULL;
+}
+
+XmlObject::~XmlObject() {
+}
+
+std::pair<std::string,std::string> XmlObject::getXpathToken(std::string xpath) const {
+    int p=xpath.find('/');
+    if (p==-1)
+        return std::pair<std::string,std::string>(xpath,std::string());
+    else
+        return std::pair<std::string,std::string>(xpath.substr(0,p),xpath.substr(p+1));
+}
+
+int XmlObject::documentElementNamespaceID() const { return -1; }
+
+std::string XmlObject::digest() const{
+	if(!contents) return "NULL";
+    	return contents->digest(); 
+}
+
+XmlObject::operator bool() const{
+	return hasContents();
+}
+
+bool XmlObject::setAnyElement(const QName& elementName,const std::string& anyContent) {
+    NoExchangeEntitiesXmlObject obj;
+    obj.setSimpleContent(anyContent);
+    xmlbeansxx::Contents::Walker::setElem(*this,elementName,obj.contents);
+ 
+    return true;
+}
+
+
+void XmlObject::serialize(std::ostream &o,XmlOptions options)  const{
+    TRACER(log,"serialize");
+    if(!hasContents()) throw NullPtrException("Cannot serialize an empty XmlObject = " + getSchemaType()->className);
+
+    if(getSchemaType() != getOrginSchemaType()) 
+        return Contents::Walker::OrginalXmlObject(contents)->serialize(o,options);
+    
+
+
+    xmlbeansxx::definitions::XmlFragmentDocument doc=xmlbeansxx::definitions::XmlFragmentDocument::Factory::newInstance();
+    doc.setXmlFragment(*this);
+    doc.serialize(o,options);
+}
+
+
+std::string XmlObject::toString(XmlOptions options) const {
+    std::ostringstream ss;
+    serialize(ss,options);
+    return ss.str();
+}
+
+const SchemaType * XmlObject::getSchemaType() const {
+    if(contents) return contents->getSchemaType();
+    else return getOrginSchemaType();
+}
+
+
+/** STAWEL - not needed for shared_ptr
+#ifdef BOOST_HAS_THREADS
+boost::recursive_mutex &XmlObject::mutex() const {
+    return contents->mutex;
+}
+#endif
+**/
+
+void XmlObject::swapContents(const ContentsPtr& p)
+{
+    contents.reset();
+    contents = p;
+}
+
+
+XmlObject XmlObject::clone() const {
+	if(contents)
+    		return XmlObject(contents->clone());
+	
+	return XmlObject();
+}
+
+std::string XmlObject::getSimpleContent() const {
+    return xmlbeansxx::Contents::Walker::getSimpleContent(*this);
+}
+
+void XmlObject::setSimpleContent(const std::string &value) {
+    const SchemaType *st=getSchemaType();
+    
+    createContents();
+    std::string str = TextUtils::applyContentTypeRules(value,st);
+    xmlbeansxx::Contents::Walker::setSimpleContent(*this,str);
+    
+}
+
+std::string XmlObject::getCanonicalContent() const {
+    return getSimpleContent();
+}
+
+
+
+void XmlObject::free() {
+    contents->free();
+    contents.reset();
+}
+
+
+XmlObject::XmlObject(const ContentsPtr &p) : contents(p) { };
+
+std::string XmlObject::exchangeEntities(const std::string& str) const {
+    return TextUtils::exchangeEntities(str);
+}
+
+
+%%class xmlbeansxx::XmlAnySimpleType
+std::string XmlAnySimpleType::getStringValue() const {
+    return getSimpleContent();
+}
+
+void XmlAnySimpleType::setStringValue(const std::string &v) {
+    setSimpleContent(v);
+}
+
+
+%%class xmlbeansxx::XmlBoolean
+XMLBEANSXX_LOGGER_PTR_SET(XmlBoolean::log,"xmlbeansxx.XmlBoolean");
+
+bool XmlBoolean::getBooleanValue() const {
+    TRACER(log,"getBooleanValue");
+    XMLBEANSXX_DEBUG(log,"value:"+getSimpleContent());
+    std::string s = getSimpleContent();
+    boost::to_lower(s);
+    bool boolVal;
+    if (s=="0") {
+        boolVal=false;
+    } else if (s=="1") {
+        boolVal=true;
+    } else if (s=="false") {
+        XMLBEANSXX_DEBUG(log,"is false"); boolVal=false;
+    } else if (s=="true") {
+        boolVal=true;
+    } else throw XmlIllegalValueException("xs:boolean",getSimpleContent());
+    return boolVal;
+}
+
+void XmlBoolean::setBooleanValue(bool v) {
+    if (v==true) setSimpleContent("true");
+    else setSimpleContent("false");
+}
+
+std::string XmlBoolean::getCanonicalContent() const {
+    bool b=getBooleanValue();
+    if (b) return "true";
+    else return "false";
+}
+
+XmlBoolean XmlBoolean::operator==(const XmlBoolean &b) const {
+    return XmlBoolean(getBooleanValue()==b.getBooleanValue());
+}
+
+XmlBoolean XmlBoolean::operator !() const {
+    return XmlBoolean(!getBooleanValue());
+}
+
+XmlBoolean XmlBoolean::operator ||(const XmlBoolean &b) const {
+    return XmlBoolean(getBooleanValue()|| b.getBooleanValue());
+}
+
+XmlBoolean XmlBoolean::operator &&(const XmlBoolean &b) const {
+    return XmlBoolean(getBooleanValue() && b.getBooleanValue());
+}
+
+XmlBoolean::operator bool() const {
+    return getBooleanValue();
+}
+
+%%class xmlbeansxx::XmlString
+XMLBEANSXX_LOGGER_PTR_SET(XmlString::log,"xmlbeansxx.XmlString");
+
+
+XmlString::operator std::string() const {
+    return getSimpleContent();
+}
+
+bool XmlString::operator==(const XmlString &b) const {
+    return getSimpleContent()==b.getSimpleContent();
+}
+bool XmlString::operator!=(const XmlString &b) const {
+    return getSimpleContent()!=b.getSimpleContent();
+}
+
+XmlString XmlString::operator+(const XmlString &b) const {
+    return XmlString(getSimpleContent()+b.getSimpleContent());
+}
+
+XmlString XmlString::substring(int beginIndex) const {
+    return substring(beginIndex,length());
+}
+
+XmlString XmlString::substring(int beginIndex,int endIndex) const {
+    TRACER(log,"substring");
+    std::string s(getSimpleContent());
+    if (beginIndex<0) {
+        beginIndex+=s.size();
+    }
+    if (endIndex<0) {
+        endIndex+=s.size();
+    }
+    if (!( beginIndex>=0 && beginIndex<=int(s.size()) && 
+           endIndex>=0 && endIndex<=int(s.size()) &&
+           beginIndex<=endIndex ))
+        throw IllegalArgumentsException(std::string("in substring '")+s
+                +"' beginIndex:"+TextUtils::intToString(beginIndex)
+                +" endIndex:"+TextUtils::intToString(endIndex));
+    
+    return XmlString(s.substr(beginIndex,endIndex-beginIndex));
+}
+
+bool XmlString::endsWith(const XmlString &b) const {
+    std::string s=b.getSimpleContent();
+    std::string s2=getSimpleContent();
+    return s2.substr(s2.size()-s.size())==s;
+}
+
+int XmlString::length() const {
+    return getSimpleContent().size();
+}
+
+%%class xmlbeansxx::XmlInteger
+XMLBEANSXX_LOGGER_PTR_SET(XmlInteger::log,"xmlbeansxx.XmlIteger");
+
+void XmlInteger::setSimpleContent(const std::string &value) {
+    XmlObject::setSimpleContent(value);
+    getMpzValue(); // throw if not valid
+}
+
+XmlInteger::operator int() const {
+    return getIntValue();
+}
+XmlInteger::operator mpz_class() const {
+    return getMpzValue();
+}
+
+%%class xmlbeansxx::XmlDecimal
+XMLBEANSXX_LOGGER_PTR_SET(XmlDecimal::log,"xmlbeansxx.XmlDecimal");
+
+mpf_class XmlDecimal::getMpfValue() const {
+    TRACER(log,"getMpfValue");
+    std::string v=TextUtils::collapse(getSimpleContent());
+    if (!TextUtils::checkDecimal(v)) 
+        throw XmlIllegalValueException("xs:decimal",v);
+    return stringToMpf(v);
+}
+
+void XmlDecimal::setMpfValue(const mpf_class &v) {
+    XmlObject::setSimpleContent(TextUtils::mpfToString(v,getSchemaType()->fractionDigits));    
+}
+
+mpz_class XmlDecimal::getMpzValue() const {
+    TRACER(log,"getMpzValue");
+    std::string v=TextUtils::collapse(getSimpleContent());
+    if (!TextUtils::checkInteger(v)) 
+        throw XmlIllegalValueException("xs:integer",v);
+    return stringToMpz(v);
+}
+
+void XmlDecimal::setMpzValue(const mpz_class &v) {
+    XmlObject::setSimpleContent(TextUtils::mpzToString(v));
+}
+
+int XmlDecimal::getIntValue() const {
+    mpz_class v=getMpzValue();
+    if (mpzFitsToInt(v)) {
+        return mpzToInt(v);
+    } else {
+        throw IllegalArgumentsException(std::string("Cannot convert decimal='")+getSimpleContent()+std::string("' to int."));
+        return 0;
+    }
+}
+
+void XmlDecimal::setIntValue(int v) {
+    setMpzValue(v);
+}
+
+mpz_class XmlDecimal::getLongValue() const {
+    return getMpzValue();
+}
+
+void XmlDecimal::setLongValue(const mpz_class &v) {
+    setMpzValue(v);
+}
+    
+short XmlDecimal::getShortValue() const {
+    int v=getIntValue();
+    if (!(v>=-32768 && v<=32767)) {
+        throw IllegalArgumentsException(std::string("Cannot convert decimal='")+getSimpleContent()+std::string("' to short."));
+        return 0;
+    }
+    return v;
+}
+
+void XmlDecimal::setShortValue(short v) {
+    setIntValue(v);
+}
+
+
+unsigned char XmlDecimal::getByteValue() const {
+    int v=getIntValue();
+    if (!(v>=0 && v<=255)) {
+        throw IllegalArgumentsException(std::string("Cannot convert decimal='")+getSimpleContent()+std::string("' to byte."));
+        return 0;
+    }
+    return v;
+}
+
+void XmlDecimal::setByteValue(unsigned char v) {
+    setIntValue(v);
+}
+
+
+void XmlDecimal::setSimpleContent(const std::string &value) {
+    XmlObject::setSimpleContent(value);
+    getMpfValue();
+}
+
+XmlDecimal::operator mpf_class() const {
+    return getMpfValue();
+}
+
+%%class xmlbeansxx::XmlDateTime
+XMLBEANSXX_LOGGER_PTR_SET(XmlDateTime::log,"xmlbeansxx.XmlDateTime");
+
+XmlDateTime::XmlDateTime(const boost::posix_time::ptime &pt) {
+    setCalendarValue(pt);
+}
+
+XmlDateTime::XmlDateTime(const xmlbeansxx::Calendar &c) {
+    setCalendarValue(c);
+}
+
+
+bool XmlDateTime::operator==(const XmlDateTime &b) const {
+    return !((*this)<b) && !(b<(*this));
+}
+bool XmlDateTime::operator!=(const XmlDateTime &b) const {
+    return !(!((*this)<b) && !(b<(*this)));
+}
+bool XmlDateTime::operator<=(const XmlDateTime &b) const {
+    return !(b<(*this));
+}
+bool XmlDateTime::operator>=(const XmlDateTime &b) const {
+    return !((*this)<b);
+}
+bool XmlDateTime::operator>(const XmlDateTime &b) const {
+    return b<(*this);
+}
+bool XmlDateTime::operator<(const XmlDateTime &b) const {
+    XmlDate d(datePart());
+    XmlTime t(timePart());
+
+    XmlDate bd(b.datePart());
+    XmlTime bt(b.timePart());
+
+    if (d==bd) return t<bt;
+    else return d<bd;
+}
+
+XmlTime XmlDateTime::timePart() const {
+    std::string dt=getSimpleContent();
+    std::string::size_type p=dt.find('T');
+
+    if (p==std::string::npos) throw XmlSimpleTypeException("T separator not found in dateTime",dt);
+    std::string retu=dt.substr(p+1);
+    std::string::size_type z=retu.find('Z');
+    return XmlTime(retu.substr(0,z));
+}
+
+XmlDate XmlDateTime::datePart() const {
+    std::string dt=getSimpleContent();
+    std::string::size_type p=dt.find('T');
+    if (p==std::string::npos) throw XmlSimpleTypeException("T separator not found in dateTime",dt);
+    return XmlDate(dt.substr(0,p));
+}
+
+xmlbeansxx::Calendar XmlDateTime::getCalendarValue() const {
+    return xmlbeansxx::Calendar(getSimpleContent());
+}
+
+void XmlDateTime::setCalendarValue(const xmlbeansxx::Calendar &v) {    
+    setSimpleContent(v.toXsdDateTime());
+}
+
+%%class xmlbeansxx::XmlTime
+XMLBEANSXX_LOGGER_PTR_SET(XmlTime::log,"xmlbeansxx.XmlTime");
+
+
+XmlTime::XmlTime(const boost::posix_time::ptime &pt) {
+    setCalendarValue(pt);
+}
+XmlTime::XmlTime(const boost::posix_time::time_duration &td) {
+    setTimeValue(td);
+}
+
+XmlTime::XmlTime(const xmlbeansxx::Calendar &td) {
+    setCalendarValue(td);
+}
+
+
+bool XmlTime::operator==(const XmlTime &b) const {
+    return !((*this)<b) && !(b<(*this));
+}
+bool XmlTime::operator!=(const XmlTime &b) const {
+    return !(!((*this)<b) && !(b<(*this)));
+}
+bool XmlTime::operator<=(const XmlTime &b) const {
+    return !(b<(*this));
+}
+bool XmlTime::operator>=(const XmlTime &b) const {
+    return !((*this)<b);
+}
+bool XmlTime::operator>(const XmlTime &b) const {
+    return b<(*this);
+}
+bool XmlTime::operator<(const XmlTime &b) const {
+    return getTimeValue()<b.getTimeValue();
+}
+
+boost::posix_time::time_duration XmlTime::getTimeValue() const {
+    return getCalendarValue().getTimeDuration();
+}
+void XmlTime::setTimeValue(const boost::posix_time::time_duration &d) {
+    xmlbeansxx::Calendar c;
+    c.setTime(boost::posix_time::to_simple_string(d));
+    setCalendarValue(c);
+}
+
+
+xmlbeansxx::Calendar XmlTime::getCalendarValue() const {
+    xmlbeansxx::Calendar c;
+    c.setTime(getSimpleContent());
+    return c;
+}
+
+void XmlTime::setCalendarValue(const xmlbeansxx::Calendar& v) {
+    setSimpleContent(v.toXsdTime());
+}
+
+%%class xmlbeansxx::XmlDate
+XMLBEANSXX_LOGGER_PTR_SET(XmlDate::log,"xmlbeansxx.XmlDate");
+
+XmlDate::XmlDate(const boost::posix_time::ptime &pt) {
+    setCalendarValue(pt);
+}
+XmlDate::XmlDate(const boost::gregorian::date &gd) {
+    setDateValue(gd);
+}
+
+XmlDate::XmlDate(const xmlbeansxx::Calendar &c) {
+    setCalendarValue(c);
+}
+
+
+
+XmlDate::operator boost::gregorian::date() const {
+    return getDateValue();
+}
+
+bool XmlDate::operator==(const XmlDate &b) const {
+    return !((*this)<b) && !(b<(*this));
+}
+bool XmlDate::operator!=(const XmlDate &b) const {
+    return !(!((*this)<b) && !(b<(*this)));
+}
+bool XmlDate::operator<=(const XmlDate &b) const {
+    return !(b<(*this));
+}
+bool XmlDate::operator>=(const XmlDate &b) const {
+    return !((*this)<b);
+}
+bool XmlDate::operator>(const XmlDate &b) const {
+    return b<(*this);
+}
+bool XmlDate::operator<(const XmlDate &b) const {
+    return getSimpleContent()<b.getSimpleContent();
+}
+
+boost::gregorian::date XmlDate::getDateValue() const {
+    return getCalendarValue().getDate();
+}
+    
+xmlbeansxx::Calendar XmlDate::getCalendarValue() const {
+    xmlbeansxx::Calendar c;
+    c.setDate(getSimpleContent());
+    return c;
+}
+
+void XmlDate::setCalendarValue(const xmlbeansxx::Calendar &v) {
+    setSimpleContent(v.toXsdDate());
+}
+
+void XmlDate::setDateValue(const boost::gregorian::date &d) {
+    xmlbeansxx::Calendar c(d);
+    setCalendarValue(c);
+}
+
+XmlInteger XmlDate::daysFrom(const XmlDate &from) const {
+    return XmlInteger((int)((getDateValue()-from.getDateValue()).days()));
+}
+
+%%class xmlbeansxx::XmlDuration
+xmlbeansxx::Duration XmlDuration::getDurationValue() const {
+    throw NotImplementedException("XmlDuration::getDurationValue");
+}
+
+void XmlDuration::setDurationValue(const xmlbeansxx::Duration &d) {
+    throw NotImplementedException("XmlDuration::setDurationValue");
+}
+
+%%class xmlbeansxx::XmlGDay
+ xmlbeansxx::Calendar XmlGDay::getCalendarValue() const {
+    throw NotImplementedException("XmlGDay::getCalendarValue");
+}
+
+void XmlGDay::setCalendarValue(const xmlbeansxx::Calendar & v) {
+    throw NotImplementedException("XmlGDay::setCalendarValue");
+}
+    
+%%class xmlbeansxx::XmlGMonth
+xmlbeansxx::Calendar XmlGMonth::getCalendarValue() const {
+    throw NotImplementedException("XmlGMonth::getCalendarValue");
+}
+
+void XmlGMonth::setCalendarValue(const  xmlbeansxx::Calendar & v) {
+    throw NotImplementedException("XmlGMonth::setCalendarValue");
+}
+    
+%%class xmlbeansxx::XmlGMonthDay
+ xmlbeansxx::Calendar XmlGMonthDay::getCalendarValue() const {
+    throw NotImplementedException("XmlGMonthDay::getCalendarValue");
+}
+
+void XmlGMonthDay::setCalendarValue(const  xmlbeansxx::Calendar& v) {
+    throw NotImplementedException("XmlGMonthDay::getCalendarValue");
+}
+    
+%%class xmlbeansxx::XmlGYear
+ xmlbeansxx::Calendar  XmlGYear::getCalendarValue() const {
+    throw NotImplementedException("XmlGYear::getCalendarValue");
+}
+
+void XmlGYear::setCalendarValue(const xmlbeansxx::Calendar & v) {
+    throw NotImplementedException("XmlGYear::getCalendarValue");
+}
+    
+%%class xmlbeansxx::XmlGYearMonth
+xmlbeansxx::Calendar XmlGYearMonth::getCalendarValue() const {
+    throw NotImplementedException("XmlGYearMonth::getCalendarValue");
+}
+
+void XmlGYearMonth::setCalendarValue(const  xmlbeansxx::Calendar & v) {
+    throw NotImplementedException("XmlGYearMonth::getCalendarValue");
+}
+    
+
+%%class xmlbeansxx::XmlBase64Binary
+xmlbeansxx::shared_array<unsigned char> XmlBase64Binary::getByteArrayValue() const {
+    return TextUtils::base64Decode(getSimpleContent());
+}
+
+void XmlBase64Binary::setByteArrayValue(xmlbeansxx::shared_array<unsigned char> v) {
+    setSimpleContent(TextUtils::base64Encode(v));
+}
+    
+
+%%class xmlbeansxx::XmlHexBinary
+xmlbeansxx::shared_array<unsigned char> XmlHexBinary::getByteArrayValue() const {
+    throw NotImplementedException("XmlHexBinary::getByteValue");
+    return xmlbeansxx::shared_array<unsigned char>();
+}
+
+void XmlHexBinary::setByteArrayValue(xmlbeansxx::shared_array<unsigned char> v) {
+    throw NotImplementedException("XmlHexBinary::getByteValue");
+}
+    
+%%class xmlbeansxx::XmlQName
+boost::shared_ptr<xmlbeansxx::QName> XmlQName::getQNameValue() const {
+    throw NotImplementedException("XmlQName::getQNameValue");
+    return boost::shared_ptr<xmlbeansxx::QName>();
+}
+
+void XmlQName::setQNameValue(boost::shared_ptr<xmlbeansxx::QName> v) {
+    throw NotImplementedException("XmlQName::getQNameValue");
+}
+
+%%class xmlbeansxx::XmlFloat
+float XmlFloat::getFloatValue() const {
+  TRACER(log,"getFloatValue");
+  XMLBEANSXX_DEBUG(log,"value:"+getSimpleContent());
+  std::istringstream iss(getSimpleContent());
+  float floatVal;
+  iss >> floatVal;
+  if (iss.fail()) {
+    throw IllegalArgumentsException(std::string("Cannot convert value='")
+                                    + getSimpleContent() + std::string("' to float."));
+    return 0.0;
+  } else {
+    return floatVal;
+  }
+}
+
+void XmlFloat::setFloatValue(float v) {
+  setSimpleContent(TextUtils::floatToString(v,getSchemaType()->fractionDigits));
+}
+
+%%class xmlbeansxx::XmlDouble
+double XmlDouble::getDoubleValue() const {
+  TRACER(log,"getDoubleValue");
+  XMLBEANSXX_DEBUG(log,"value:"+getSimpleContent());
+  std::istringstream iss(getSimpleContent());
+  double doubleVal;
+  iss >> doubleVal;
+  if (iss.fail()) {
+    throw IllegalArgumentsException(std::string("Cannot convert value='")
+                                    + getSimpleContent() + std::string("' to double."));
+    return 0.0;
+  } else {
+    return doubleVal;
+  }
+}
+
+void XmlDouble::setDoubleValue(double v) {
+  setSimpleContent(TextUtils::doubleToString(v,getSchemaType()->fractionDigits));
+}
+    
+%%
+

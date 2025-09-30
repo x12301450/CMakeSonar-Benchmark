@@ -1,0 +1,58 @@
+language: cpp
+sudo: true
+addons:
+    apt:
+        packages:
+            - build-essential
+            - cmake
+            - libopenal-dev
+osx_image: xcode7.3
+matrix:
+    include:
+        - os: linux
+          compiler: gcc
+          env: CONFIGURATION="Debug" wxWidgets_ver=2.8
+        - os: linux
+          compiler: gcc
+          env: CONFIGURATION="Debug" wxWidgets_ver=3.0
+          
+        - os: linux
+          compiler: clang
+          env: CONFIGURATION="Debug" wxWidgets_ver=2.8
+        - os: linux
+          compiler: clang
+          env: CONFIGURATION="Debug" wxWidgets_ver=3.0
+          
+        - os: osx
+          compiler: clang
+          env: CONFIGURATION="Debug"
+
+        - os: linux
+          compiler: gcc
+          env: CONFIGURATION="Release" wxWidgets_ver=2.8
+        - os: linux
+          compiler: gcc
+          env: CONFIGURATION="Release" wxWidgets_ver=3.0
+          
+        - os: linux
+          compiler: clang
+          env: CONFIGURATION="Release" wxWidgets_ver=2.8
+        - os: linux
+          compiler: clang
+          env: CONFIGURATION="Release" wxWidgets_ver=3.0
+          
+        - os: osx
+          compiler: clang
+          env: CONFIGURATION="Release"
+before_install:
+    - ./ci/travis/before_install.sh
+install:
+    - ./ci/travis/install.sh
+before_script:
+    - ./ci/travis/before_script.sh
+script:
+    - ./ci/travis/script.sh
+cache:
+    - pip: true
+    - directories:
+        - $HOME/cmake

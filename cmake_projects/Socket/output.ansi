@@ -1,0 +1,27 @@
+Break for time or iteration limit reached.
+Total runtime 50 and time 0.2098846435546875 seconds.
+
+[31m[1mType Error:[0m [1mStringFlag UnionType[0m
+[90m    →[0m cmake_projects/Socket/network/CMakeLists.txt:69:29
+[90m    │[0m
+[90m 69 │[0m    [94m[1mset[0m[34m([0m[97m[3mOPENSSL_SSL_LIBRARY[0m [95m$[0m[95m{[0m[97m[3mOPENSSL_ROOT_DIR[0m[95m}[0m[36m/lib/libssl.a[0m[34m)[0m
+[90m[2m[0m[90m    │[0m    [0m                        [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mStringFlag UnionType[0m
+[90m    →[0m cmake_projects/Socket/network/CMakeLists.txt:68:32
+[90m    │[0m
+[90m 68 │[0m    [94m[1mset[0m[34m([0m[97m[3mOPENSSL_CRYPTO_LIBRARY[0m [95m$[0m[95m{[0m[97m[3mOPENSSL_ROOT_DIR[0m[95m}[0m[36m/lib/libcrypto.a[0m[34m)[0m
+[90m[2m[0m[90m    │[0m    [0m                           [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mStringFlag UnionType[0m
+[90m    →[0m cmake_projects/Socket/network/CMakeLists.txt:67:29
+[90m    │[0m
+[90m 67 │[0m    [94m[1mset[0m[34m([0m[97m[3mOPENSSL_INCLUDE_DIR[0m [95m$[0m[95m{[0m[97m[3mOPENSSL_ROOT_DIR[0m[95m}[0m[36m/include[0m[34m)[0m
+[90m[2m[0m[90m    │[0m    [0m                        [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mStringFlag UnionType[0m
+[90m    →[0m cmake_projects/Socket/network/CMakeLists.txt:65:55
+[90m    │[0m
+[90m 65 │[0m    [94m[1mtarget_include_directories[0m[34m([0m[95m$[0m[95m{[0m[97m[3mLIBRARY_NAME[0m[95m}[0m [94m[1mPUBLIC[0m [95m$[0m[95m{[0m[97m[3mOPENSSL_ROOT_DIR[0m[95m}[0m[36m/include[0m[34m)[0m
+[90m[2m[0m[90m    │[0m    [0m                                                  [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+

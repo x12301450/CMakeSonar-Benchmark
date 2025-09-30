@@ -1,0 +1,50 @@
+Total runtime 46 and time 0.056432247161865234 seconds.
+
+[31m[1mType Error:[0m [1mDouble slash in concatenated path[0m
+[90m    →[0m cmake_projects/vm_manager/src/services/protos/CMakeLists.txt:27:15
+[90m    │[0m
+[90m 27 │[0m    [94m[1mOUTPUT[0m [2m"[0m[95m$[0m[95m{[0m[97m[3mPROTOS_GEN_DIR[0m[95m}[0m[36m/[0m[95m$[0m[95m{[0m[97m[3mFIL_WE[0m[95m}[0m[36m.[0m[36mp[0m[36mb[0m[36m.[0m[36mc[0m[36mc[0m[2m"[0m
+[90m[2m[0m[90m    │[0m    [0m        [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mDouble slash in concatenated path[0m
+[90m    →[0m cmake_projects/vm_manager/src/services/protos/CMakeLists.txt:28:15
+[90m    │[0m
+[90m 28 │[0m    [2m"[0m[95m$[0m[95m{[0m[97m[3mPROTOS_GEN_DIR[0m[95m}[0m[36m/[0m[95m$[0m[95m{[0m[97m[3mFIL_WE[0m[95m}[0m[36m.[0m[36mp[0m[36mb[0m[36m.[0m[36mh[0m[2m"[0m
+[90m[2m[0m[90m    │[0m    [0m [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mDouble slash in concatenated path[0m
+[90m    →[0m cmake_projects/vm_manager/src/services/protos/CMakeLists.txt:29:15
+[90m    │[0m
+[90m 29 │[0m    [2m"[0m[95m$[0m[95m{[0m[97m[3mPROTOS_GEN_DIR[0m[95m}[0m[36m/[0m[95m$[0m[95m{[0m[97m[3mFIL_WE[0m[95m}[0m[36m.[0m[36mg[0m[36mr[0m[36mp[0m[36mc[0m[36m.[0m[36mp[0m[36mb[0m[36m.[0m[36mc[0m[36mc[0m[2m"[0m
+[90m[2m[0m[90m    │[0m    [0m [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mDouble slash in concatenated path[0m
+[90m    →[0m cmake_projects/vm_manager/src/services/protos/CMakeLists.txt:30:15
+[90m    │[0m
+[90m 30 │[0m    [2m"[0m[95m$[0m[95m{[0m[97m[3mPROTOS_GEN_DIR[0m[95m}[0m[36m/[0m[95m$[0m[95m{[0m[97m[3mFIL_WE[0m[95m}[0m[36m.[0m[36mg[0m[36mr[0m[36mp[0m[36mc[0m[36m.[0m[36mp[0m[36mb[0m[36m.[0m[36mh[0m[2m"[0m
+[90m[2m[0m[90m    │[0m    [0m [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mDouble slash in concatenated path[0m
+[90m    →[0m cmake_projects/vm_manager/src/services/protos/CMakeLists.txt:24:37
+[90m    │[0m
+[90m 24 │[0m    [94m[1mlist[0m[34m([0m[94m[1mAPPEND[0m [97m[3mCIV_GRPC_PROTOS_HDRS[0m [2m"[0m[95m$[0m[95m{[0m[97m[3mPROTOS_GEN_DIR[0m[95m}[0m[36m/[0m[95m$[0m[95m{[0m[97m[3mFIL_WE[0m[95m}[0m[36m.[0m[36mg[0m[36mr[0m[36mp[0m[36mc[0m[36m.[0m[36mp[0m[36mb[0m[36m.[0m[36mh[0m[2m"[0m[34m)[0m
+[90m[2m[0m[90m    │[0m    [0m                                  [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mDouble slash in concatenated path[0m
+[90m    →[0m cmake_projects/vm_manager/src/services/protos/CMakeLists.txt:23:37
+[90m    │[0m
+[90m 23 │[0m    [94m[1mlist[0m[34m([0m[94m[1mAPPEND[0m [97m[3mCIV_GRPC_PROTOS_SRCS[0m [2m"[0m[95m$[0m[95m{[0m[97m[3mPROTOS_GEN_DIR[0m[95m}[0m[36m/[0m[95m$[0m[95m{[0m[97m[3mFIL_WE[0m[95m}[0m[36m.[0m[36mg[0m[36mr[0m[36mp[0m[36mc[0m[36m.[0m[36mp[0m[36mb[0m[36m.[0m[36mc[0m[36mc[0m[2m"[0m[34m)[0m
+[90m[2m[0m[90m    │[0m    [0m                                  [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mDouble slash in concatenated path[0m
+[90m    →[0m cmake_projects/vm_manager/src/services/protos/CMakeLists.txt:22:32
+[90m    │[0m
+[90m 22 │[0m    [94m[1mlist[0m[34m([0m[94m[1mAPPEND[0m [97m[3mCIV_PROTOS_HDRS[0m [2m"[0m[95m$[0m[95m{[0m[97m[3mPROTOS_GEN_DIR[0m[95m}[0m[36m/[0m[95m$[0m[95m{[0m[97m[3mFIL_WE[0m[95m}[0m[36m.[0m[36mp[0m[36mb[0m[36m.[0m[36mh[0m[2m"[0m[34m)[0m
+[90m[2m[0m[90m    │[0m    [0m                             [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mDouble slash in concatenated path[0m
+[90m    →[0m cmake_projects/vm_manager/src/services/protos/CMakeLists.txt:21:32
+[90m    │[0m
+[90m 21 │[0m    [94m[1mlist[0m[34m([0m[94m[1mAPPEND[0m [97m[3mCIV_PROTOS_SRCS[0m [2m"[0m[95m$[0m[95m{[0m[97m[3mPROTOS_GEN_DIR[0m[95m}[0m[36m/[0m[95m$[0m[95m{[0m[97m[3mFIL_WE[0m[95m}[0m[36m.[0m[36mp[0m[36mb[0m[36m.[0m[36mc[0m[36mc[0m[2m"[0m[34m)[0m
+[90m[2m[0m[90m    │[0m    [0m                             [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+

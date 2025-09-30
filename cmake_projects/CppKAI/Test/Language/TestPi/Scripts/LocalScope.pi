@@ -1,0 +1,57 @@
+// Start with a clean state ensuring depth is 1
+1 depth 1 == assert
+
+// Test simple variable assignment and comparison
+'w 'z # 
+'w 'y #
+z y == assert
+
+// Test non-existent variable
+'foo exists not assert
+
+// Test variable assignment and retrieval
+42 'a #
+'a exists assert
+a 42 == assert
+
+// Test variable arithmetic
+2 'b #
+a b + 44 == assert
+
+// p is a 'pointer' to object called 'a
+'a 'p #
+'a p == assert // test Label/Pathname equivalence
+
+// 'dereference' the 'pointer'
+p @ 42 == assert
+
+// can access outer scope
+{ a } & 42 == assert
+{ p @ } & 42 == assert
+
+// Test non-existent variable
+'e exists not assert
+
+// name resolution works up the context stack
+{ 5 'e # { 'e exists assert } & } &
+
+// e was local to the previous continuation
+'e exists not assert
+
+// Test continuation as function
+{ + } 'plus #
+1 2 + 3 == assert
+1 2 plus & 3 == assert
+
+// Complex nested continuation
+{ 7 'e # { e 2 } & { + } 'p # p & } & 9 == assert
+
+// Test variable scope in continuation
+{ 1 'qq # 'qq exists assert } & 'qq exists not assert
+
+// Ensure only one value left on stack (our initial 1)
+depth 1 == assert
+
+// Clean up at the end
+clear
+

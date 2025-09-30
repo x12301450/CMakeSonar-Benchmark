@@ -1,0 +1,59 @@
+os: Visual Studio 2017
+
+cache: c:\users\appveyor\clcache
+
+environment:
+  BOOST_ROOT: C:\Libraries\boost_1_67_0
+  BOOST_LIBRARYDIR: C:\Libraries\boost_1_67_0\lib64-msvc-14
+
+init:
+  - set PATH=c:\Python37;c:\Python37\Scripts;%PATH%
+  - pip install clcache
+
+before_build:
+  - clcache -s
+
+build_script:
+  - md build
+  - cd build
+  - cmake -G "Visual Studio 15 2017 Win64" .. -DARCH=default -DOPENSSL_ROOT_DIR=C:\OpenSSL-v111-Win64
+  - MSBuild Plenteum.sln /p:CLToolExe=clcache.exe /p:CLToolPath=c:\Python37\Scripts\ /p:Configuration=Release /m
+  - src\Release\cryptotest.exe
+
+after_build:
+  - clcache -s
+  - if not defined APPVEYOR_REPO_TAG_NAME (set APPVEYOR_REPO_TAG_NAME=%APPVEYOR_REPO_COMMIT%)
+  - cd src\Release
+  - mkdir plenteum-%APPVEYOR_REPO_TAG_NAME%
+  - copy *.exe plenteum-%APPVEYOR_REPO_TAG_NAME%
+  - copy ..\..\..\LICENSE plenteum-%APPVEYOR_REPO_TAG_NAME%
+  - 7z a plenteum-%APPVEYOR_REPO_TAG_NAME%-windows.zip plenteum-%APPVEYOR_REPO_TAG_NAME%
+  - copy plenteum-%APPVEYOR_REPO_TAG_NAME%-windows.zip ..\..\..\
+
+artifacts:
+  - path: plenteum-$(APPVEYOR_REPO_TAG_NAME)-windows.zip
+    name: PlenteumRelease
+
+deploy:
+  - provider: GitHub
+    auth_token:
+      secure: OIpVlIUPKnoTdNlscdoby66Mdci8gld8A4gSSCd0A4UiqNcEPzgi0PY3FD2RQ3/1
+    artifact: PlenteumRelease
+    draft: true
+    prerelease: false
+    on:
+      appveyor_repo_name: plenteum/plenteum
+      appveyor_repo_tag: true
+    
+  - provider: S3
+    access_key_id:
+      secure: ZApE3I60k12/Ro/I91l0gmAU1DnarzA2fj7m1Dz9xLc=
+    secret_access_key:
+      secure: LqF0lQYhorEYeYFYJ4eGOrs7iph+BAAuc1iqlxNmbSi/x6pgk2VklG1v1LhHtf8W
+    bucket: plenteum-artifacts
+    region: us-east-2
+    set_public: true
+    folder: plenteum
+    artifact: PlenteumRelease
+    on:
+      appveyor_repo_name: plenteum/plenteum

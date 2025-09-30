@@ -1,0 +1,3 @@
+lxc.net.0.type = veth
+lxc.net.0.link = @SC_BRIDGE_DEVICE@
+lxc.net.0.name = eth0

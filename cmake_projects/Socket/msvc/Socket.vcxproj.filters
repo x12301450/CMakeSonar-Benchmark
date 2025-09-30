@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\network">
+      <UniqueIdentifier>{2d5b4bfc-956e-4216-a81f-d34dded04fb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\network">
+      <UniqueIdentifier>{f8320e00-2b45-4dd2-81da-3bf6cabec331}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\application">
+      <UniqueIdentifier>{9da67c28-6e1e-4c5a-ae4c-346be3e3e279}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\application\client">
+      <UniqueIdentifier>{526d35b0-8496-40db-bce5-e2ce96f9b273}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\application\server">
+      <UniqueIdentifier>{1b479769-6ce4-412b-a91c-b9a16d4be4d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\application">
+      <UniqueIdentifier>{d9aa65ce-0fe4-487c-8258-95a18ced9c29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\application\server">
+      <UniqueIdentifier>{671e95e7-2903-4ad4-be48-53a46740d56d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\application\client">
+      <UniqueIdentifier>{26a0507c-ee1a-4452-a41b-0b1cd4c269d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\libs">
+      <UniqueIdentifier>{db549116-f942-4fe6-950f-016ad372eb5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\libs">
+      <UniqueIdentifier>{ed2412ac-dfdd-4d1a-a3d6-2a0d3b8c4360}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\network\Socket.cpp">
+      <Filter>Source Files\network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\network\SocketOption.cpp">
+      <Filter>Source Files\network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\network\SocketDescriptor.cpp">
+      <Filter>Source Files\network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\network\SSLSocket.cpp">
+      <Filter>Source Files\network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\network\SSLSocketDescriptor.cpp">
+      <Filter>Source Files\network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\application\client\Client.cpp">
+      <Filter>Source Files\application\client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\application\client\SSLClient.cpp">
+      <Filter>Source Files\application\client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\application\server\Server.cpp">
+      <Filter>Source Files\application\server</Filter>
+    </ClCompile>
+    <ClCompile Include="..\application\server\SSLServer.cpp">
+      <Filter>Source Files\application\server</Filter>
+    </ClCompile>
+    <ClCompile Include="..\examples\server\ServerApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libs\general\BaseException.cpp">
+      <Filter>Source Files\libs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\network\SocketException.cpp">
+      <Filter>Source Files\network</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\network\Socket.h">
+      <Filter>Header Files\network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\network\SocketOption.h">
+      <Filter>Header Files\network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\network\version.h">
+      <Filter>Header Files\network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\examples\Client.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\examples\pcout.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\examples\SecureClient.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\examples\SecureServer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\examples\Server.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\network\SocketDescriptor.h">
+      <Filter>Header Files\network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\network\SocketExport.h">
+      <Filter>Header Files\network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\network\SSLSocket.h">
+      <Filter>Header Files\network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\network\SSLSocketDescriptor.h">
+      <Filter>Header Files\network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\application\client\Client.h">
+      <Filter>Header Files\application\client</Filter>
+    </ClInclude>
+    <ClInclude Include="..\application\client\SSLClient.h">
+      <Filter>Header Files\application\client</Filter>
+    </ClInclude>
+    <ClInclude Include="..\application\server\Server.h">
+      <Filter>Header Files\application\server</Filter>
+    </ClInclude>
+    <ClInclude Include="..\application\server\SSLServer.h">
+      <Filter>Header Files\application\server</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libs\general\BaseException.h">
+      <Filter>Header Files\libs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libs\general\ExceptionExport.h">
+      <Filter>Header Files\libs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\network\SocketException.h">
+      <Filter>Header Files\network</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

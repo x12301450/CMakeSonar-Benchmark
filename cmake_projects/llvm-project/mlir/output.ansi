@@ -1,0 +1,9 @@
+Break for time or iteration limit reached.
+Total runtime 50 and time 7.4311583042144775 seconds.
+
+[31m[1mType Error:[0m [1mRequired type 'List[Path[StartSlash(X), EndSlash(X)]]', found 'Ref[String]'[0m
+[90m     →[0m cmake_projects/mlir/lib/Target/LLVM/CMakeLists.txt:137:23
+[90m     │[0m
+[90m 137 │[0m    [94m[1mPATHS[0m [95m$[0m[95m{[0m[97m[3mCUDAToolkit_LIBRARY_ROOT[0m[95m}[0m
+[90m[2m[0m[90m     │[0m    [0m      [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+

@@ -1,0 +1,84 @@
+#include "megdnn/oprs.h"
+
+#include "src/common/utils.h"
+
+namespace megdnn {
+
+void Images2NeibsBase::deduce_layout_fwd(const TensorLayout& src, TensorLayout& dst) {
+    auto errmsg = [&]() {
+        return megdnn_layout_msg(src) + ", " +
+               "pad_h=" + std::to_string(param().pad_h) + ", " +
+               "pad_w=" + std::to_string(param().pad_w) + ", " +
+               "stride_h=" + std::to_string(param().stride_h) + ", " +
+               "stride_w=" + std::to_string(param().stride_w) + ", " +
+               "dilate_h=" + std::to_string(param().dilate_h) + ", " +
+               "dilate_w=" + std::to_string(param().dilate_w) + ", " +
+               "window_h=" + std::to_string(param().window_h) + ", " +
+               "window_w=" + std::to_string(param().window_w);
+    };
+    MEGDNN_MARK_USED_VAR(errmsg);
+    megdnn_assert_contiguous(src);
+    megdnn_assert(src.ndim == 4_z || src.ndim == 5_z, "%s", errmsg().c_str());
+
+    if (src.ndim == 4_z) {
+        size_t n = src[0], ic = src[1], ih = src[2], iw = src[3];
+        size_t ph = this->param().pad_h;
+        size_t pw = this->param().pad_w;
+        size_t sh = this->param().stride_h;
+        size_t sw = this->param().stride_w;
+        size_t dh = this->param().dilate_h;
+        size_t dw = this->param().dilate_w;
+        size_t wh = this->param().window_h;
+        size_t ww = this->param().window_w;
+        size_t oh, ow;
+        infer_conv_shape2d(
+                ih, iw, wh + (wh - 1) * (dh - 1), ww + (ww - 1) * (dw - 1), sh, sw, ph,
+                pw, oh, ow);
+        dst = TensorLayout(TensorShape({n, ic, oh, ow, wh, ww}), src.dtype, src.format);
+    } else if (src.ndim == 5_z) {
+        size_t n = src[0], ih = src[1], iw = src[3], ic = src[2];
+        size_t ph = this->param().pad_h;
+        size_t pw = this->param().pad_w;
+        size_t sh = this->param().stride_h;
+        size_t sw = this->param().stride_w;
+        size_t dh = this->param().dilate_h;
+        size_t dw = this->param().dilate_w;
+        size_t wh = this->param().window_h;
+        size_t ww = this->param().window_w;
+        size_t oh, ow;
+        infer_conv_shape2d(
+                ih, iw, wh + (wh - 1) * (dh - 1), ww + (ww - 1) * (dw - 1), sh, sw, ph,
+                pw, oh, ow);
+        dst = TensorLayout(
+                TensorShape({n, oh, ic, ow, wh, ww, 4}), src.dtype, src.format);
+    }
+}
+
+void Images2NeibsBase::check_layout_fwd(
+        const TensorLayout& src, const TensorLayout& dst) {
+    TensorLayout dst_expected;
+    deduce_layout_fwd(src, dst_expected);
+    megdnn_assert_eq_layout(dst_expected, dst);
+}
+
+void Images2NeibsForward::deduce_layout(const TensorLayout& src, TensorLayout& dst) {
+    deduce_layout_fwd(src, dst);
+}
+
+void Images2NeibsForward::check_exec(
+        const TensorLayout& src, const TensorLayout& dst, size_t workspace_in_bytes) {
+    check_layout_fwd(src, dst);
+    auto required_workspace_in_bytes = get_workspace_in_bytes(src, dst);
+    megdnn_assert(workspace_in_bytes >= required_workspace_in_bytes);
+}
+
+void Images2NeibsBackward::check_exec(
+        const TensorLayout& diff, const TensorLayout& grad, size_t workspace_in_bytes) {
+    check_layout_fwd(grad, diff);
+    auto required_workspace_in_bytes = get_workspace_in_bytes(grad, diff);
+    megdnn_assert(workspace_in_bytes >= required_workspace_in_bytes);
+}
+
+}  // namespace megdnn
+
+// vim: syntax=cpp.doxygen

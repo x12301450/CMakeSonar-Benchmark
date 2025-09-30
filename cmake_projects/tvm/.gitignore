@@ -1,0 +1,6 @@
+doc/*.aux
+doc/*.pdf
+doc/*.log
+build
+.cache/
+compile_commands.json

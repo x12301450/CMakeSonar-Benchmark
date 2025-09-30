@@ -1,0 +1,155 @@
+sudo: false
+language: cpp
+cache:
+ ccache: true
+ directories:
+    - /home/travis/toolchain
+
+matrix:
+  include:
+
+  # Ubuntu, g++-8
+  - os: linux
+    dist: trusty
+    compiler: gcc
+    addons:
+      apt:
+        sources:
+        - ubuntu-toolchain-r-test
+        packages:
+          - libboost1.55-all-dev
+          - libssl-dev
+          - g++-8
+          - gcc-8
+    env:
+    - MATRIX_EVAL="CC=gcc-8 && CXX=g++-8"
+    - LABEL="linux"
+    - _DEPLOYABLE="true"
+    - STRIP="strip"
+
+  # Ubuntu, g++-7
+  - os: linux
+    dist: trusty
+    compiler: gcc
+    addons:
+      apt:
+        sources:
+        - ubuntu-toolchain-r-test
+        packages:
+          - libboost1.55-all-dev
+          - libssl-dev
+          - g++-7
+          - gcc-7
+    env:
+    - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
+    - LABEL="linux-g++-7"
+    - STRIP="strip"
+
+  # Ubuntu, clang-6
+  - os: linux
+    dist: trusty
+    compiler: clang
+    addons:
+      apt:
+        sources:
+        - ubuntu-toolchain-r-test
+        - llvm-toolchain-trusty-6.0
+        packages:
+          - libboost1.55-all-dev
+          - libssl-dev
+          - clang-6.0
+          - libstdc++-7-dev
+    env:
+    - MATRIX_EVAL="CC=clang-6.0 && CXX=clang++-6.0"
+    - LABEL="linux-clang-6"
+    - STRIP="strip"
+
+  # OSX, clang
+  - os: osx
+    osx_image: xcode10
+    compiler: clang
+    env:
+    - MATRIX_EVAL="CC=/usr/local/opt/llvm@8/bin/clang && CXX=/usr/local/opt/llvm@8/bin/clang++"
+    - LABEL="osx"
+    - _DEPLOYABLE="true"
+    - STRIP="strip"
+
+  # Arm (aarch64) cross compile
+  - os: linux
+    dist: trusty
+    env:
+    - MATRIX_EVAL="CC=aarch64-linux-gnu-gcc && CXX=aarch64-linux-gnu-g++"
+    - LABEL="aarch64"
+    - _DEPLOYABLE="true"
+    - STRIP="aarch64-linux-gnu-strip"
+
+before_install:
+- eval $MATRIX_EVAL
+
+install:
+# Need to uninstall oclint to get newer gcc installed https://github.com/travis-ci/travis-ci/issues/8826
+- if [[ "${LABEL:0:3}" == "osx" ]]; then brew cask uninstall --force oclint || true ; fi
+
+# Need a newer version of llvm to link against to get std::filesystem / std::experimental::filesystem
+- if [[ "${LABEL:0:3}" == "osx" ]]; then travis_retry brew install llvm@8 || travis_retry brew upgrade llvm@8 ; fi
+- if [[ "${LABEL:0:3}" == "osx" ]]; then travis_retry brew link --force llvm@8 ; fi
+- if [[ "${LABEL:0:3}" == "osx" ]]; then ln -s /usr/local/opt/llvm@8 /usr/local/opt/llvm ; fi
+
+# Need to make sure that we have openssl installed
+- if [[ "${LABEL:0:3}" == "osx" ]]; then travis_retry brew install openssl || travis_retry brew upgrade openssl ; fi
+- if [[ "${LABEL:0:3}" == "osx" ]]; then brew link --force openssl ; fi
+- if [[ "${LABEL:0:3}" == "osx" ]]; then ln -s /usr/local/opt/openssl/include/openssl /usr/local/include ; fi
+
+# Neeed to install ccache
+- if [[ "${LABEL:0:3}" == "osx" ]]; then travis_retry brew install ccache ; fi
+- if [[ "${LABEL:0:3}" == "osx" ]]; then export PATH="/usr/local/opt/ccache/libexec:$PATH" ; fi
+
+script:
+- eval $MATRIX_EVAL
+# If we're cross compiling aarch64, make sure our build enivornment is setup
+# we do this in the script stage because this happens after the repo is cloned
+- if [[ "$LABEL" == "aarch64" ]]; then source scripts/prep-aarch64.sh ; fi
+- mkdir build && cd build
+- cmake -DARCH=default -DCMAKE_BUILD_TYPE=Release -DSTATIC=true ..
+- make -j2
+- if [[ "$LABEL" != "aarch64" ]]; then ./src/cryptotest ; fi
+
+before_deploy:
+- if [[ "${TRAVIS_TAG}" == "" ]]; then export TRAVIS_TAG=${TRAVIS_COMMIT} ; fi
+- cd src
+- TARGETS="Plenteumd miner zedwallet wallet-service zedwallet-beta cryptotest wallet-api wallet-upgrader"
+- ${STRIP} ${TARGETS}
+- rm -rf plenteum-${TRAVIS_TAG}
+- mkdir plenteum-${TRAVIS_TAG}
+- cp ${TARGETS} plenteum-${TRAVIS_TAG}/
+- cp ../../LICENSE plenteum-${TRAVIS_TAG}/
+- tar cvfz plenteum-${TRAVIS_TAG}-${LABEL}.tar.gz plenteum-${TRAVIS_TAG}/
+- rm -rf builds
+- mkdir builds
+- cp plenteum-${TRAVIS_TAG}-${LABEL}.tar.gz builds
+deploy:
+  - provider: releases
+    api_key:
+      secure: evLH6n9RuHFKC80eC3x8EKXbqd0CpftofhXeeyUg95ccLnkBlZOAGm85vTPFhCTBTku9qUScczbImm+92dFFpC1zCpn9poiIpYrpQRTMJ3FoKPILv39o1QFLPbH0G724x2CPeoACtRiRxV1ASIXU3ywmrd3v8/Uuf4mc14OFHGsvHooMhMLRxUWe58KGIG3lhT0zwREISozH+UlLIu80KePPuWusVcSTsnDky/qU8gsZmiwPpInQQcZ0ikCtc0FHzVoiLx0Mn7eQvugMLEi8xOp40Ig+1HWt5s9hUHoYDX9HEyypYKjjGdLvClGxu2nE1+0358g0NRuIs/34vl11cID0vyu7n44qshhA1IWl1+d8cT1MQv3mAUqkXhbQM01m4wkZiXDuQ9eqiyGjqcdyNP7rdOreX/PFPxv7/SFJZ2yMaBFRaam6m5mxNVWZt/GHYyIwJ/ah2aIQf7s5eOQlA3K56B2r8rcNNnhfKbLQYhSvZD0ww0iGi0oCmrHXvif9wWBJDLciYc78xzAHy7SNt1vasYw6EaKoa5FtVPwP0QLBUhR3puJtVi3Gr5QugrZCoBbHZ8SVa4xhgeGRiILADIAZ2BcWxVmdFlVYcIGk/8LEdrrP2UVrhK8cUgjLgoaZxtY91xsABiEbO33cqqYs3zD8FVKTFiGAw8+8j63Ldfc=
+    file: plenteum-${TRAVIS_TAG}-${LABEL}.tar.gz
+    skip_cleanup: true
+    on:
+      tags: true
+      draft: true
+      condition: "$_DEPLOYABLE = true"
+      repo: plenteum/plenteum
+    
+  - provider: s3
+    access_key_id:
+      secure: MX/3ybR1GiSRgDcwzh22WFkRd6Cjq2HeLXEAmPdYF+FWd5PRKiIv6W4KBgtpBX504VjeuxQKY3FkIpsTGyiWJVgK6j4jJ7j6ePAmfQJz9Y3i4HP88+N1PAm09DxrYdjBFgDWNE1RMHEkbjIQQLKlMSYA9PbIPOhxXHqwi+bd+cu7UyAdDO3hpuLJZK6yNac6mZ4iqI6wbHWUlSt+LfSEcxumwlR8gkF7Og3Baiy1JWpfRDTTQwGXKs3HJzaUQV2a9UoHqkz7Er10iUFz6Crtk5skat3aMrlt5eLe5G+NZfEi+rtWnK+emY1S/tU1XHGRoH+fNqrECmSS1dcmb+2kXQHXVVzH6EnPii2QX3youHAQwwFFVwhGOj1kkp2GYa7Agt5oLs5CkIqAllM99f4ngmyHVrcHokLZ3FYsvCEE6dpQDUcrffzkmpvUbVIo30/0ruygm06oaAiM1udpkp3qQIdV4lqfXu5162jYf5IhJWlWFjagTHHZBskQ+rAFoQDUPM5lDDXWcFG4LI1sJD/9HlcNTnvzv98vAsPFForR1uFDXamRhIbAttOA+a+EBcnCij+qB2JJ7JvVbLw3PnTEvG7xn8v6Yb34wmLfw8GOWm/z9hGoB9IFcn4pbEDD6s7NDFX/ncpXbL1VgGdfDaJEChEoWoyyP5mgrIy+Zef46z4=
+    secret_access_key:
+      secure: wdbEb6/K5EQwdSs+8YfZy/gY8/8GPIGelNnRiH9OlUxwPRVLfgoEHprE0Y6APnOnGf2+Re0VySlTlNrZW/1QpLhpjyFBhmZVl3l5F3ipxfGCDr6MydloA6WfyBQBBw61wFPXLh1LmRSbV8Svo1EyNfQwpotX55qwrCNKF934nvfIiiNPq7kL65p8LTVPgB4grNLhdBgNbmN5HY6A7ucGpJx75BDlcOtWZn7jNi6RJjS8NmBn2CpRtceJ9zldXmtMx/0zpdX6XkWYDr1LFb4SLU4YJKlSlQBRNwHTVB/WWrll0kwpupc0JyHBSDWDMIo/XCnV+2kh0/aqUAklgxd0nmEMVEjTPDU2c/6tj4zxuSWc8WpExHsGscVmaaXxFq/41+2j034fAB/jWQIQp0yTHO6ipnoOgbL9+oZkJ7RxmGzvEFd3/7KlNXKrQ6SyZdJ4tSDrIff2cFcY4tzQ2kKnFvjFoWMGGCpJGobztUv+Wna1MdumLAxdyW9B47Lx6dkoeuw/t0LHmedi/+3TcOFhite0rHV9GX99Ch0UEm29YTiP1Vgf0lLSSA8u7Ls56Ma99UqgHHYWfExJMvc2kClJY2F23Owshye09yygNy+X0R8hxFgK4Zk11+WsEDZvVNHsuwyXyNeMT1UMcGFypyHPpVV86ocqKxqds1z8kVyrkR8=
+    bucket: plenteum-artifacts
+    skip_cleanup: true
+    acl: public_read
+    region: us-east-2
+    upload-dir: plenteum
+    local-dir: builds
+    on:
+      repo: plenteum/plenteum
+      all_branches: true

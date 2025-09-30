@@ -1,0 +1,110 @@
+name: CI of TVM
+
+on:
+  workflow_dispatch:
+  push:
+    paths-ignore:
+      # Changes to those files don't mandate running CI
+      - ".clang-format"
+      - "debian/**"
+    branches:
+      - '**'
+  pull_request:
+    branches:
+      - '**'
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-22.04, macos-latest, windows-latest]
+        build-type: [Debug, RelWithDebInfo]
+        compiler: [gcc, clang]
+        with-robot: [ON, OFF]
+        exclude:
+          # Only default compiler on macos-latest and windows-latest
+          - os: macos-latest
+            compiler: clang
+          - os: windows-latest
+            compiler: clang
+    runs-on: ${{ matrix.os }}
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+    - name: Temporary APT mirrors cleanup
+      if: startsWith(runner.os, 'Linux')
+      run: |
+        set -e
+        sudo rm -f /etc/apt/sources.list.d/dotnetdev.list /etc/apt/sources.list.d/microsoft-prod.list
+    - name: Install dependencies
+      uses: jrl-umi3218/github-actions/install-dependencies@master
+      with:
+        compiler: ${{ matrix.compiler }}
+        build-type: ${{ matrix.build-type }}
+        ubuntu: |
+          apt: libeigen3-dev doxygen doxygen-latex graphviz libboost-all-dev
+        macos: |
+          brew: eigen boost gcc
+        windows: |
+          github:
+            - path: eigenteam/eigen-git-mirror
+              ref: 3.3.7
+        options: -DPYTHON_BINDING:BOOL=OFF
+        github: |
+          - path: jrl-umi3218/eigen-qld
+          - path: jrl-umi3218/eigen-quadprog
+          - path: jrl-umi3218/lexls
+            options: -DINSTALL_PDF_DOCUMENTATION:BOOL=OFF -DINSTALL_HTML_DOCUMENTATION:BOOL=OFF
+    - name: Install Tasks
+      uses: jrl-umi3218/github-actions/install-dependencies@master
+      with:
+        compiler: ${{ matrix.compiler }}
+        build-type: ${{ matrix.build-type }}
+        ubuntu: |
+          apt: libtinyxml2-dev libyaml-cpp-dev
+        macos: |
+          brew: tinyxml2 yaml-cpp
+        windows: |
+          github:
+            - path: leethomason/tinyxml2
+              ref: 7.1.0
+            - path: jbeder/yaml-cpp
+              ref: 29dcf92f870ee51cce8d68f8fcfe228942e8dfe1
+        options: -DPYTHON_BINDING:BOOL=OFF
+        github: |
+          - path: jrl-umi3218/SpaceVecAlg
+          - path: jrl-umi3218/sch-core
+            options: -DCMAKE_CXX_STANDARD=11
+          - path: jrl-umi3218/RBDyn
+          - path: jrl-umi3218/Tasks
+          - path: jrl-umi3218/mc_rtc_data
+            ref: ROSFree
+      if: matrix.with-robot == 'ON'
+    - name: Build and test
+      uses: jrl-umi3218/github-actions/build-cmake-project@master
+      with:
+        compiler: ${{ matrix.compiler }}
+        build-type: ${{ matrix.build-type }}
+        options: -DTVM_WITH_QLD:BOOL=ON -DTVM_WITH_QUADPROG:BOOL=ON -DTVM_WITH_LEXLS:BOOL=ON -DTVM_WITH_ROBOT:BOOL=${{ matrix.with-robot }} -DTVM_THOROUGH_TESTING:BOOL=${{(github.event_name == 'pull_request' && startsWith(github.base_ref, 'refs/heads/master')) || startsWith(github.ref, 'refs/heads/master') || startsWith(github.ref, 'refs/tags/')}}
+    - name: Check TVM usage
+      shell: bash
+      run: |
+        set -x
+        ./.github/workflows/scripts/test-usage.sh ${{ matrix.build-type }}
+    - name: Upload documentation
+      # Only run on master branch and for one configuration
+      if: matrix.os == 'ubuntu-22.04' && matrix.build-type == 'RelWithDebInfo' && matrix.compiler == 'gcc' && github.ref == 'refs/heads/master' && matrix.with-robot == 'OFF'
+      uses: jrl-umi3218/github-actions/upload-documentation@master
+      with:
+        GH_USER: gergondet
+        GH_PAGES_TOKEN: ${{ secrets.GH_PAGES_TOKEN }}
+    - name: Slack Notification
+      if: failure()
+      uses: archive/github-actions-slack@master
+      with:
+        slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_TOKEN }}
+        slack-channel: '#tvm'
+        slack-text: >
+          [TVM] Build *${{ matrix.os }}/${{ matrix.build-type }}/with-robot:${{ matrix.with-robot }} (${{ matrix.compiler }})* failed on ${{ github.ref }}

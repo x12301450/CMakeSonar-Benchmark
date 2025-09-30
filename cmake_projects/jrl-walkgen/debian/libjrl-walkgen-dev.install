@@ -1,0 +1,3 @@
+opt/openrobots/include/*
+opt/openrobots/lib/lib*.so
+opt/openrobots/lib/pkgconfig/*

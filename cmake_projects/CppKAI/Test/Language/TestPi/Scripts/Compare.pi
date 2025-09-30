@@ -1,0 +1,45 @@
+// Make sure to start with a clean state
+clear
+
+// may seem simple, but
+// this has to deal with comments
+
+// and blank lines
+
+// and executing things and stuff
+1 1 + 2 == assert
+
+// but it shows that the core systems are all up
+
+true assert 
+
+true true and assert
+
+// Check that stack is empty after each assertion
+depth 0 == assert
+
+1 1 and assert
+
+"foo" "bar" and assert
+
+"spam" 42 and assert
+
+true false or assert
+
+false false and not assert
+
+false true or assert
+
+false not assert 
+
+true not not assert 
+
+false not true and assert
+
+// Clean up at the end
+clear
+
+// TODO:
+//1 2 less assert
+//2 1 greater assert
+

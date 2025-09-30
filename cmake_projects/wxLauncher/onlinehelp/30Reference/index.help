@@ -1,0 +1,15 @@
+<title>Reference</title>
+# Reference
+
+This section explains the various controls and functions of the launcher:
+
+* [Welcome page][welcome]![][li]
+* [Mods page][mods]![][li]
+* [Basic Settings page][basic]![][li]
+* [Advanced Settings page][advanced]![][li]
+
+[li]: /images/li.png
+[welcome]: 10Welcome/index.help
+[mods]: 20MODs/index.help
+[basic]: 30BasicSettings/index.help
+[advanced]: 40AdvancedSettings/index.help

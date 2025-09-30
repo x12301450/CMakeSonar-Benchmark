@@ -1,0 +1,9 @@
+Break for time or iteration limit reached.
+Total runtime 50 and time 0.11519479751586914 seconds.
+
+[31m[1mType Error:[0m [1mDouble slash in concatenated path[0m
+[90m    →[0m cmake_projects/OpenCFD-AMR/CMakeLists.txt:82:24
+[90m    │[0m
+[90m 82 │[0m    [94m[1mFILE[0m[34m([0m[94m[1mGLOB[0m [97m[3mcaselist[0m [95m$[0m[95m{[0m[97m[3msubdir[0m[95m}[0m[36m/*[0m[34m)[0m
+[90m[2m[0m[90m    │[0m    [0m                   [0m[31m[2m[0m[31m[1m^^^^^^^^^^^[0m[31m[2m[0m
+

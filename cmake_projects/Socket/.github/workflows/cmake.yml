@@ -1,0 +1,119 @@
+name: CMake Build
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  BUILD_TYPE: Release
+  VCPKG_BUILD_TYPE: release
+
+jobs:
+  build_matrix:
+    strategy:
+      matrix:
+        platform:
+          - os: ubuntu-latest
+            name: linux
+            cache_path: /home/runner/.cache/vcpkg/archives
+          - os: windows-latest
+            name: windows
+            cache_path: C:/Users/runneradmin/AppData/Local/vcpkg/archives
+          - os: macos-latest
+            name: osx
+            cache_path: /Users/runner/.cache/vcpkg/archives
+        buildType: ["Debug", "Release"]
+        shared: [true, false]
+    runs-on: ${{ matrix.platform.os }}
+    env:
+      VCPKG_CACHE: ${{ matrix.platform.cache_path }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          submodules: 'true'
+
+      - name: Cache vcpkg archives
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.VCPKG_CACHE }}
+          key: ${{ runner.os }}-vcpkg-archives-${{ matrix.buildType }}-${{ matrix.shared }}-${{ hashFiles('vcpkg.json') }}
+          restore-keys: |
+            ${{ runner.os }}-vcpkg-archives-
+
+      - name: Ensure vcpkg cache dir exists (Unix)
+        if: runner.os != 'Windows'
+        run: mkdir -p ${{ env.VCPKG_CACHE }}
+        shell: bash
+
+      - name: Ensure vcpkg cache dir exists (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          if not exist "${{ env.VCPKG_CACHE }}" mkdir "${{ env.VCPKG_CACHE }}"
+        shell: cmd
+
+      - name: Set up vcpkg (Unix)
+        if: runner.os != 'Windows'
+        run: |
+          if [ ! -f vcpkg/bootstrap-vcpkg.sh ]; then
+            rm -rf vcpkg
+            git clone https://github.com/microsoft/vcpkg.git
+            cd vcpkg
+            git checkout 2025.06.13
+            cd ..
+          fi
+          ./vcpkg/bootstrap-vcpkg.sh
+        shell: bash
+
+      - name: Set up vcpkg (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          if not exist "vcpkg\scripts\bootstrap.ps1" (
+            rmdir /s /q vcpkg
+            git clone https://github.com/microsoft/vcpkg.git
+            cd vcpkg
+            git checkout 2025.06.13
+            cd ..
+          )
+          powershell -NoProfile -ExecutionPolicy Bypass -Command "& .\vcpkg\scripts\bootstrap.ps1"
+        shell: cmd
+
+      - name: Install vcpkg dependencies (Unix)
+        if: runner.os != 'Windows'
+        run: |
+          export VCPKG_BINARY_SOURCES="clear;files,${{ env.VCPKG_CACHE }},readwrite"
+          ./vcpkg/vcpkg install
+        shell: bash
+
+      - name: Install vcpkg dependencies (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          set VCPKG_BINARY_SOURCES=clear;files,${{ env.VCPKG_CACHE }},readwrite
+          .\vcpkg\vcpkg install
+        shell: cmd
+
+      - name: Configure CMake (Unix)
+        if: runner.os != 'Windows'
+        run: |
+          cmake -B build \
+                -DCMAKE_BUILD_TYPE=${{ matrix.buildType }} \
+                -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake \
+                -DBUILD_SHARED_LIBS=${{ matrix.shared }} \
+                -DBUILD_WITH_OPENSSL=ON
+        shell: bash
+
+      - name: Configure CMake (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          cmake -B build -DCMAKE_BUILD_TYPE=${{ matrix.buildType }} -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}\vcpkg\scripts\buildsystems\vcpkg.cmake -DBUILD_SHARED_LIBS=${{ matrix.shared }} -DBUILD_WITH_OPENSSL=ON
+        shell: cmd
+
+      - name: Build
+        run: cmake --build build --config ${{ matrix.buildType }}
+
+      - name: Test
+        run: ctest --output-on-failure -C ${{ matrix.buildType }}
+        working-directory: build

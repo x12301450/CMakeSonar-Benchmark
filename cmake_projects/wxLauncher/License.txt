@@ -1,0 +1,29 @@
+wxLauncher is copyright the wxLauncher Team.
+
+wxLauncher is Free Software, released under the 
+GNU General Public License, version 2.
+
+You should have one copy of the license downloaded with the
+source (GPLv2.txt found alongside this summary). If it is 
+missing, you can find a copy of the license at:
+	http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+	
+Please add it back to the source package ;)
+
+The source code for this software is available for download
+at http://code.google.com/p/wxlauncher/downloads/list
+
+** The interfaces that wxLauncher uses to interact
+with the FreeSpace 2 Open binaries are licensed (
+including but not limited to the Volition Pack files,
+and flag file) under FreeSpace 2 Open's license 
+and are copyright Volition, Inc. (developer of 
+Freespace 2), Interplay (publisher of FreeSpace 2),
+THQ (Volition, Inc's current owner) and/or the 
+Freespace 2 Source Code Project (SCP). **
+
+All source in the libraries folder is licensed under
+its respective license which is indicated by a License.txt
+in its source folder and/or a header in the code file.
+
+The wxLauncher Team.

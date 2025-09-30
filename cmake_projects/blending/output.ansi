@@ -1,0 +1,14 @@
+Total runtime 2 and time 0.06762075424194336 seconds.
+
+[31m[1mType Error:[0m [1mType 'List[AbsPath]' is not concatenatable with type 'String'[0m
+[90m    →[0m cmake_projects/blending/src/utils/CMakeLists.txt:27:5
+[90m    │[0m
+[90m 27 │[0m    [95m$[0m[95m{[0m[97m[3mheader_dir[0m[95m}[0m[36m/*.h[0m[34m)[0m
+[90m[2m[0m[90m    │[0m    [0m[0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mType 'List[AbsPath]' is not concatenatable with type 'String'[0m
+[90m    →[0m cmake_projects/blending/src/blending/CMakeLists.txt:28:5
+[90m    │[0m
+[90m 28 │[0m    [95m$[0m[95m{[0m[97m[3mheader_dir[0m[95m}[0m[36m/*.h[0m[34m)[0m
+[90m[2m[0m[90m    │[0m    [0m[0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+

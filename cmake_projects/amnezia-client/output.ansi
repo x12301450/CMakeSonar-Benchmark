@@ -1,0 +1,81 @@
+Break for time or iteration limit reached.
+Total runtime 50 and time 0.280517578125 seconds.
+
+[31m[1mType Error:[0m [1mDouble slash in concatenated path[0m
+[90m    →[0m cmake_projects/amnezia-client/service/server/CMakeLists.txt:21:26
+[90m    │[0m
+[90m 21 │[0m    [94m[1mset[0m[34m([0m[97m[3mOPENSSL_INCLUDE_DIR[0m [2m"[0m[95m$[0m[95m{[0m[97m[3mOPENSSL_ROOT_DIR[0m[95m}[0m[36m/[0m[36mw[0m[36mi[0m[36mn[0m[36md[0m[36mo[0m[36mw[0m[36ms[0m[36m/[0m[36mi[0m[36mn[0m[36mc[0m[36ml[0m[36mu[0m[36md[0m[36me[0m[2m"[0m[34m)[0m
+[90m[2m[0m[90m    │[0m    [0m                         [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mDouble slash in concatenated path[0m
+[90m    →[0m cmake_projects/amnezia-client/service/server/CMakeLists.txt:23:31
+[90m    │[0m
+[90m 23 │[0m    [94m[1mset[0m[34m([0m[97m[3mOPENSSL_LIB_SSL_PATH[0m [2m"[0m[95m$[0m[95m{[0m[97m[3mOPENSSL_ROOT_DIR[0m[95m}[0m[36m/[0m[36mw[0m[36mi[0m[36mn[0m[36md[0m[36mo[0m[36mw[0m[36ms[0m[36m/[0m[36mw[0m[36mi[0m[36mn[0m[36m6[0m[36m4[0m[36m/[0m[36ml[0m[36mi[0m[36mb[0m[36ms[0m[36ms[0m[36ml[0m[36m.[0m[36ml[0m[36mi[0m[36mb[0m[2m"[0m[34m)[0m
+[90m[2m[0m[90m    │[0m    [0m                          [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mDouble slash in concatenated path[0m
+[90m    →[0m cmake_projects/amnezia-client/service/server/CMakeLists.txt:36:38
+[90m    │[0m
+[90m 36 │[0m    [94m[1mset[0m[34m([0m[97m[3mOPENSSL_LIB_CRYPTO_PATH[0m [2m"[0m[95m$[0m[95m{[0m[97m[3mOPENSSL_ROOT_DIR[0m[95m}[0m[36m/[0m[36mw[0m[36mi[0m[36mn[0m[36md[0m[36mo[0m[36mw[0m[36ms[0m[36m/[0m[36mw[0m[36mi[0m[36mn[0m[36m3[0m[36m2[0m[36m/[0m[36ml[0m[36mi[0m[36mb[0m[36mc[0m[36mr[0m[36my[0m[36mp[0m[36mt[0m[36mo[0m[36m.[0m[36ml[0m[36mi[0m[36mb[0m[2m"[0m[34m)[0m
+[90m[2m[0m[90m    │[0m    [0m                             [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mDouble slash in concatenated path[0m
+[90m    →[0m cmake_projects/amnezia-client/service/server/CMakeLists.txt:27:34
+[90m    │[0m
+[90m 27 │[0m    [94m[1mset[0m[34m([0m[97m[3mOPENSSL_LIB_CRYPTO_PATH[0m [2m"[0m[95m$[0m[95m{[0m[97m[3mOPENSSL_ROOT_DIR[0m[95m}[0m[36m/[0m[36mw[0m[36mi[0m[36mn[0m[36md[0m[36mo[0m[36mw[0m[36ms[0m[36m/[0m[36mw[0m[36mi[0m[36mn[0m[36m3[0m[36m2[0m[36m/[0m[36ml[0m[36mi[0m[36mb[0m[36mc[0m[36mr[0m[36my[0m[36mp[0m[36mt[0m[36mo[0m[36m.[0m[36ml[0m[36mi[0m[36mb[0m[2m"[0m[34m)[0m
+[90m[2m[0m[90m    │[0m    [0m                             [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mDouble slash in concatenated path[0m
+[90m    →[0m cmake_projects/amnezia-client/service/server/CMakeLists.txt:24:34
+[90m    │[0m
+[90m 24 │[0m    [94m[1mset[0m[34m([0m[97m[3mOPENSSL_LIB_CRYPTO_PATH[0m [2m"[0m[95m$[0m[95m{[0m[97m[3mOPENSSL_ROOT_DIR[0m[95m}[0m[36m/[0m[36mw[0m[36mi[0m[36mn[0m[36md[0m[36mo[0m[36mw[0m[36ms[0m[36m/[0m[36mw[0m[36mi[0m[36mn[0m[36m6[0m[36m4[0m[36m/[0m[36ml[0m[36mi[0m[36mb[0m[36mc[0m[36mr[0m[36my[0m[36mp[0m[36mt[0m[36mo[0m[36m.[0m[36ml[0m[36mi[0m[36mb[0m[2m"[0m[34m)[0m
+[90m[2m[0m[90m    │[0m    [0m                             [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mDouble slash in concatenated path[0m
+[90m    →[0m cmake_projects/amnezia-client/service/server/CMakeLists.txt:43:34
+[90m    │[0m
+[90m 43 │[0m    [94m[1mset[0m[34m([0m[97m[3mOPENSSL_LIB_CRYPTO_PATH[0m [2m"[0m[95m$[0m[95m{[0m[97m[3mOPENSSL_ROOT_DIR[0m[95m}[0m[36m/[0m[36ml[0m[36mi[0m[36mn[0m[36mu[0m[36mx[0m[36m/[0m[36mx[0m[36m8[0m[36m6[0m[36m_[0m[36m6[0m[36m4[0m[36m/[0m[36ml[0m[36mi[0m[36mb[0m[36mc[0m[36mr[0m[36my[0m[36mp[0m[36mt[0m[36mo[0m[36m.[0m[36ma[0m[2m"[0m[34m)[0m
+[90m[2m[0m[90m    │[0m    [0m                             [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mDouble slash in concatenated path[0m
+[90m    →[0m cmake_projects/amnezia-client/service/server/CMakeLists.txt:32:30
+[90m    │[0m
+[90m 32 │[0m    [94m[1mset[0m[34m([0m[97m[3mOPENSSL_INCLUDE_DIR[0m [2m"[0m[95m$[0m[95m{[0m[97m[3mOPENSSL_ROOT_DIR[0m[95m}[0m[36m/[0m[36mw[0m[36mi[0m[36mn[0m[36md[0m[36mo[0m[36mw[0m[36ms[0m[36m/[0m[36mi[0m[36mn[0m[36mc[0m[36ml[0m[36mu[0m[36md[0m[36me[0m[2m"[0m[34m)[0m
+[90m[2m[0m[90m    │[0m    [0m                         [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mDouble slash in concatenated path[0m
+[90m    →[0m cmake_projects/amnezia-client/service/server/CMakeLists.txt:26:31
+[90m    │[0m
+[90m 26 │[0m    [94m[1mset[0m[34m([0m[97m[3mOPENSSL_LIB_SSL_PATH[0m [2m"[0m[95m$[0m[95m{[0m[97m[3mOPENSSL_ROOT_DIR[0m[95m}[0m[36m/[0m[36mw[0m[36mi[0m[36mn[0m[36md[0m[36mo[0m[36mw[0m[36ms[0m[36m/[0m[36mw[0m[36mi[0m[36mn[0m[36m3[0m[36m2[0m[36m/[0m[36ml[0m[36mi[0m[36mb[0m[36ms[0m[36ms[0m[36ml[0m[36m.[0m[36ml[0m[36mi[0m[36mb[0m[2m"[0m[34m)[0m
+[90m[2m[0m[90m    │[0m    [0m                          [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mDouble slash in concatenated path[0m
+[90m    →[0m cmake_projects/amnezia-client/service/server/CMakeLists.txt:40:34
+[90m    │[0m
+[90m 40 │[0m    [94m[1mset[0m[34m([0m[97m[3mOPENSSL_LIB_CRYPTO_PATH[0m [2m"[0m[95m$[0m[95m{[0m[97m[3mOPENSSL_ROOT_DIR[0m[95m}[0m[36m/[0m[36mm[0m[36ma[0m[36mc[0m[36mo[0m[36ms[0m[36m/[0m[36ml[0m[36mi[0m[36mb[0m[36m/[0m[36ml[0m[36mi[0m[36mb[0m[36mc[0m[36mr[0m[36my[0m[36mp[0m[36mt[0m[36mo[0m[36m.[0m[36ma[0m[2m"[0m[34m)[0m
+[90m[2m[0m[90m    │[0m    [0m                             [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mDouble slash in concatenated path[0m
+[90m    →[0m cmake_projects/amnezia-client/service/server/CMakeLists.txt:42:30
+[90m    │[0m
+[90m 42 │[0m    [94m[1mset[0m[34m([0m[97m[3mOPENSSL_INCLUDE_DIR[0m [2m"[0m[95m$[0m[95m{[0m[97m[3mOPENSSL_ROOT_DIR[0m[95m}[0m[36m/[0m[36ml[0m[36mi[0m[36mn[0m[36mu[0m[36mx[0m[36m/[0m[36mi[0m[36mn[0m[36mc[0m[36ml[0m[36mu[0m[36md[0m[36me[0m[2m"[0m[34m)[0m
+[90m[2m[0m[90m    │[0m    [0m                         [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mDouble slash in concatenated path[0m
+[90m    →[0m cmake_projects/amnezia-client/service/server/CMakeLists.txt:34:38
+[90m    │[0m
+[90m 34 │[0m    [94m[1mset[0m[34m([0m[97m[3mOPENSSL_LIB_CRYPTO_PATH[0m [2m"[0m[95m$[0m[95m{[0m[97m[3mOPENSSL_ROOT_DIR[0m[95m}[0m[36m/[0m[36mw[0m[36mi[0m[36mn[0m[36md[0m[36mo[0m[36mw[0m[36ms[0m[36m/[0m[36mw[0m[36mi[0m[36mn[0m[36m6[0m[36m4[0m[36m/[0m[36ml[0m[36mi[0m[36mb[0m[36mc[0m[36mr[0m[36my[0m[36mp[0m[36mt[0m[36mo[0m[36m.[0m[36ml[0m[36mi[0m[36mb[0m[2m"[0m[34m)[0m
+[90m[2m[0m[90m    │[0m    [0m                             [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mDouble slash in concatenated path[0m
+[90m    →[0m cmake_projects/amnezia-client/service/server/CMakeLists.txt:39:30
+[90m    │[0m
+[90m 39 │[0m    [94m[1mset[0m[34m([0m[97m[3mOPENSSL_INCLUDE_DIR[0m [2m"[0m[95m$[0m[95m{[0m[97m[3mOPENSSL_ROOT_DIR[0m[95m}[0m[36m/[0m[36mm[0m[36ma[0m[36mc[0m[36mo[0m[36ms[0m[36m/[0m[36mi[0m[36mn[0m[36mc[0m[36ml[0m[36mu[0m[36md[0m[36me[0m[2m"[0m[34m)[0m
+[90m[2m[0m[90m    │[0m    [0m                         [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mDouble slash in concatenated path[0m
+[90m    →[0m cmake_projects/amnezia-client/service/server/CMakeLists.txt:19:28
+[90m    │[0m
+[90m 19 │[0m    [94m[1mset[0m[34m([0m[97m[3mOPENSSL_LIBRARIES_DIR[0m [2m"[0m[95m$[0m[95m{[0m[97m[3mOPENSSL_ROOT_DIR[0m[95m}[0m[36m/[0m[36ml[0m[36mi[0m[36mb[0m[2m"[0m[34m)[0m
+[90m[2m[0m[90m    │[0m    [0m                           [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+

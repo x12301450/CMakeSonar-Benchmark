@@ -1,0 +1,15 @@
+set(DEMO_UI
+    ${CMAKE_CURRENT_SOURCE_DIR}/mainwindow.ui
+    PARENT_SCOPE
+)
+
+set(DEMO_HEADER
+    ${CMAKE_CURRENT_SOURCE_DIR}/mainwindow.h
+    PARENT_SCOPE
+)
+set(DEMO_SOURCE
+    ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/mainwindow.cpp
+    PARENT_SCOPE
+)
+

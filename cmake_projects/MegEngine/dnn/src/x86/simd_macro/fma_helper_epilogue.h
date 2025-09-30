@@ -1,0 +1,11 @@
+#include "src/common/simd_macro/epilogue.h"
+
+#undef MEGDNN_SIMD_ADD
+#undef MEGDNN_SIMD_SUB
+#undef MEGDNN_SIMD_MUL
+#undef MEGDNN_SIMD_FNMADD
+#undef MEGDNN_SIMD_UNPACKLO
+#undef MEGDNN_SIMD_UNPACKHI
+#undef MEGDNN_SIMD_SHUFFLE
+#undef MEGDNN_SIMD_BLEND
+#undef MEGDNN_SIMD_PERMUTE2F128

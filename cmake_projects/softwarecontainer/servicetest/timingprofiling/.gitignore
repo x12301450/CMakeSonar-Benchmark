@@ -1,0 +1,5 @@
+simple
+dlt.log
+*.properties
+test.log
+testoutput/

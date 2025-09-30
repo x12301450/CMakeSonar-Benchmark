@@ -1,0 +1,13 @@
+<title>Lighting presets</title>
+
+# Lighting presets
+
+This page has some collections of flags that have been assembled by community members.
+Selecting one of these presets will automatically update your [current command line][ccl]![][le] settings
+See more at the [Hard Light Wiki][presetdescs]![][le].
+
+[ccl]: 15commandline.help
+[le]: /images/le.png
+[fso]: /50TechnicalStuff/02Terminology.help
+[scp]: /50TechnicalStuff/02Terminology.help
+[presetdescs]: http://www.hard-light.net/wiki/index.php/Sample_Lighting_Settings

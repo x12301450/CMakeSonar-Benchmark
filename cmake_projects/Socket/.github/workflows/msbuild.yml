@@ -1,0 +1,78 @@
+name: MSBuild
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  # Path to the solution file relative to the root of the project.
+  SOLUTION_FILE_PATH: msvc/Socket.sln
+
+  # Configuration type to build (e.g., Release, Debug, or custom like Release_OpenSSL).
+  BUILD_CONFIGURATION: Release_OpenSSL
+
+  VCPKG_BUILD_TYPE: release
+  VCPKG_CACHE: C:/Users/runneradmin/AppData/Local/vcpkg/archives
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          submodules: 'true'
+
+      - name: Cache vcpkg archives
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.VCPKG_CACHE }}
+          key: ${{ runner.os }}-vcpkg-archives-${{ env.BUILD_CONFIGURATION }}-${{ hashFiles('vcpkg.json') }}
+          restore-keys: |
+            ${{ runner.os }}-vcpkg-archives-
+
+      - name: Ensure vcpkg cache dir exists
+        run: |
+          if not exist "${{ env.VCPKG_CACHE }}" mkdir "${{ env.VCPKG_CACHE }}"
+        shell: cmd
+
+      - name: Set up vcpkg
+        run: |
+          if not exist "vcpkg\scripts\bootstrap.ps1" (
+            rmdir /s /q vcpkg
+            git clone https://github.com/microsoft/vcpkg.git
+            cd vcpkg
+            git checkout 2025.06.13
+            cd ..
+          )
+          powershell -NoProfile -ExecutionPolicy Bypass -Command "& .\vcpkg\scripts\bootstrap.ps1"
+        shell: cmd
+
+      - name: Integrate vcpkg
+        run: .\vcpkg\vcpkg integrate install
+        shell: cmd
+
+      - name: Install dependencies
+        shell: cmd
+        run: |
+          set VCPKG_BINARY_SOURCES=clear;files,${{ env.VCPKG_CACHE }},readwrite
+          .\vcpkg\vcpkg install --triplet x64-windows --debug
+
+      - name: Restore NuGet packages
+        run: |
+          nuget restore %SOLUTION_FILE_PATH%
+        shell: cmd
+
+      - name: Add MSBuild to PATH
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Build solution
+        run: |
+          msbuild %SOLUTION_FILE_PATH% /m /p:Configuration=%BUILD_CONFIGURATION%
+        shell: cmd

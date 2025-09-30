@@ -1,0 +1,63 @@
+Break for time or iteration limit reached.
+Total runtime 50 and time 5.507579565048218 seconds.
+
+[31m[1mType Error:[0m [1mDouble slash in concatenated path[0m
+[90m      →[0m cmake_projects/MegEngine/CMakeLists.txt:1426:6
+[90m      │[0m
+[90m 1426 │[0m    [95m$[0m[95m{[0m[97m[3mMGB_OPR_PARAM_DEFS_OUT_DIR[0m[95m}[0m[36m/megbrain/opr/param_defs.h[0m[34m)[0m
+[90m[2m[0m[90m      │[0m    [0m[0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mDouble slash in concatenated path[0m
+[90m      →[0m cmake_projects/MegEngine/CMakeLists.txt:1418:10
+[90m      │[0m
+[90m 1418 │[0m    [94m[1mOUTPUT[0m [95m$[0m[95m{[0m[97m[3mMGB_OPR_PARAM_DEFS_OUT_DIR[0m[95m}[0m[36m/megbrain/opr/param_defs.h[0m
+[90m[2m[0m[90m      │[0m    [0m       [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mDouble slash in concatenated path[0m
+[90m     →[0m cmake_projects/MegEngine/dnn/src/CMakeLists.txt:170:42
+[90m     │[0m
+[90m 170 │[0m    [94m[1mfile[0m[34m([0m[94m[1mGLOB_RECURSE[0m [97m[3mCUTLASS_GEN_FILES[0m [2m"[0m[95m$[0m[95m{[0m[97m[3mCURRENT_CUTLASS_GEN_DIR[0m[95m}[0m[36m/[0m[36m*[0m[36m.[0m[36mc[0m[36mu[0m[2m"[0m[34m)[0m
+[90m[2m[0m[90m     │[0m    [0m                                     [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mDouble slash in concatenated path[0m
+[90m     →[0m cmake_projects/MegEngine/dnn/src/CMakeLists.txt:153:17
+[90m     │[0m
+[90m 153 │[0m    [94m[1mRELATIVE[0m [2m"[0m[95m$[0m[95m{[0m[97m[3mCURRENT_CUTLASS_GEN_DIR[0m[95m}[0m[36m/[0m[2m"[0m
+[90m[2m[0m[90m     │[0m    [0m          [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mDouble slash in concatenated path[0m
+[90m     →[0m cmake_projects/MegEngine/dnn/src/CMakeLists.txt:154:8
+[90m     │[0m
+[90m 154 │[0m    [2m"[0m[95m$[0m[95m{[0m[97m[3mCURRENT_CUTLASS_GEN_DIR[0m[95m}[0m[36m/[0m[36m*[0m[36m.[0m[36mc[0m[36mu[0m[2m"[0m[34m)[0m
+[90m[2m[0m[90m     │[0m    [0m [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mDouble slash in concatenated path[0m
+[90m    →[0m cmake_projects/MegEngine/dnn/CMakeLists.txt:18:33
+[90m    │[0m
+[90m 18 │[0m    [94m[1mlist[0m[34m([0m[94m[1mAPPEND[0m [97m[3mOPR_PARAM_DEFS_OUTS[0m [95m$[0m[95m{[0m[97m[3mOPR_PARAM_DEFS_OUT_DIR[0m[95m}[0m[36m/megdnn/opr_param_defs.h[0m
+[90m[2m[0m[90m    │[0m    [0m                                [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mDouble slash in concatenated path[0m
+[90m    →[0m cmake_projects/MegEngine/dnn/CMakeLists.txt:19:6
+[90m    │[0m
+[90m 19 │[0m    [95m$[0m[95m{[0m[97m[3mOPR_PARAM_DEFS_OUT_DIR[0m[95m}[0m[36m/megdnn/opr_param_json.h[0m[34m)[0m
+[90m[2m[0m[90m    │[0m    [0m[0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mDouble slash in concatenated path[0m
+[90m   →[0m cmake_projects/MegEngine/dnn/CMakeLists.txt:7:10
+[90m   │[0m
+[90m 7 │[0m    [94m[1mOUTPUT[0m [95m$[0m[95m{[0m[97m[3mOPR_PARAM_DEFS_OUT_DIR[0m[95m}[0m[36m/megdnn/opr_param_defs.h[0m
+[90m[2m[0m[90m   │[0m    [0m       [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mDouble slash in concatenated path[0m
+[90m   →[0m cmake_projects/MegEngine/dnn/CMakeLists.txt:8:10
+[90m   │[0m
+[90m 8 │[0m    [95m$[0m[95m{[0m[97m[3mOPR_PARAM_DEFS_OUT_DIR[0m[95m}[0m[36m/megdnn/opr_param_json.h[0m
+[90m[2m[0m[90m   │[0m    [0m[0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mDouble slash in concatenated path[0m
+[90m    →[0m cmake_projects/MegEngine/imperative/CMakeLists.txt:80:39
+[90m    │[0m
+[90m 80 │[0m    [94m[1mLIBRARY_OUTPUT_DIRECTORY[0m [95m$[0m[95m{[0m[97m[3mMEGENGINE_DIR[0m[95m}[0m[36m/[0m[95m$[0m[95m{[0m[97m[3mPACKAGE_NAME[0m[95m}[0m[36m/core[0m[34m)[0m
+[90m[2m[0m[90m    │[0m    [0m                         [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+

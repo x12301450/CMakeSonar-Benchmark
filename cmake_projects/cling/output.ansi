@@ -1,0 +1,21 @@
+Break for time or iteration limit reached.
+Total runtime 50 and time 2.1279664039611816 seconds.
+
+[31m[1mType Error:[0m [1mType 'Path' is not concatenatable with type 'List[AbsPath | Unknown]'[0m
+[90m     →[0m cmake_projects/cling/CMakeLists.txt:458:27
+[90m     │[0m
+[90m 458 │[0m    [94m[1mset[0m[34m([0m[97m[3mCLING_INCLUDE_PATHS[0m [2m"[0m[95m$[0m[95m{[0m[97m[3mCLING_INCLUDE_PATHS[0m[95m}[0m[95m$[0m[95m{[0m[97m[3mcling_path_delim[0m[95m}[0m[95m$[0m[95m{[0m[97m[3mcling_include_deflt[0m[95m}[0m[2m"[0m[34m)[0m
+[90m[2m[0m[90m     │[0m    [0m                         [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mType 'String' is not concatenatable with type 'Ref[String]'[0m
+[90m     →[0m cmake_projects/cling/tools/libcling/CMakeLists.txt:102:10
+[90m     │[0m
+[90m 102 │[0m    [2m"[0m[95m$[0m[95m{[0m[97m[3mLIBCLING_LINK_FLAGS[0m[95m}[0m[36m[2m␣[0m[36m-[0m[36mW[0m[36ml[0m[36m,[0m[36m-[0m[36mc[0m[36mu[0m[36mr[0m[36mr[0m[36me[0m[36mn[0m[36mt[0m[36m_[0m[36mv[0m[36me[0m[36mr[0m[36ms[0m[36mi[0m[36mo[0m[36mn[0m[36m[2m␣[0m[36m-[0m[36mW[0m[36ml[0m[36m,[0m[95m$[0m[95m{[0m[97m[3mLLVM_SUBMIT_VERSION[0m[95m}[0m[36m.[0m[95m$[0m[95m{[0m[97m[3mLLVM_SUBMIT_SUBVERSION[0m[95m}[0m[2m"[0m[34m)[0m
+[90m[2m[0m[90m     │[0m    [0m [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+
+[31m[1mType Error:[0m [1mType 'String' is not concatenatable with type 'Ref[String]'[0m
+[90m    →[0m cmake_projects/cling/tools/Jupyter/CMakeLists.txt:89:22
+[90m    │[0m
+[90m 89 │[0m    [2m"[0m[95m$[0m[95m{[0m[97m[3mLIBCLINGJUPYTER_LINK_FLAGS[0m[95m}[0m[36m[2m␣[0m[36m-[0m[36mW[0m[36ml[0m[36m,[0m[36m-[0m[36mc[0m[36mu[0m[36mr[0m[36mr[0m[36me[0m[36mn[0m[36mt[0m[36m_[0m[36mv[0m[36me[0m[36mr[0m[36ms[0m[36mi[0m[36mo[0m[36mn[0m[36m[2m␣[0m[36m-[0m[36mW[0m[36ml[0m[36m,[0m[95m$[0m[95m{[0m[97m[3mLLVM_SUBMIT_VERSION[0m[95m}[0m[36m.[0m[95m$[0m[95m{[0m[97m[3mLLVM_SUBMIT_SUBVERSION[0m[95m}[0m[2m"[0m[34m)[0m
+[90m[2m[0m[90m    │[0m    [0m [0m[31m[2m[0m[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m[31m[2m[0m
+

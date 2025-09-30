@@ -1,0 +1,14 @@
+CMAKE_BUILD_TYPE=RelWithDebInfo
+cuda=ON
+tmva=ON
+tmva-cpu=ON
+tmva-gpu=ON
+tmva-cudnn=ON
+tmva-pymva=OFF
+gdml=OFF
+spectrum=OFF
+sqlite=OFF
+test_distrdf_dask=OFF
+test_distrdf_pyspark=OFF
+unfold=OFF
+webgui=ON

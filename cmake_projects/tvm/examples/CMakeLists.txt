@@ -1,0 +1,15 @@
+macro(addExample name)
+  add_executable(${name} ${name}.cpp ${ARGN})
+  target_link_libraries(${name} TVM)
+  target_include_directories(
+    ${name} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../tests>)
+  add_test(${name}Unit ${name})
+  # Adding a project configuration file (for MSVC only)
+  generate_msvc_dot_user_file(${name} "${CMAKE_INSTALL_PREFIX}/bin")
+  set_target_properties(${name} PROPERTIES FOLDER "Examples")
+endmacro(addExample)
+
+addexample(FunctionWritingExample)
+addexample(LeastSquaresExample)
+addexample(ProblemWritingExample ../tests/SolverTestFunctions.cpp)
+addexample(TaskDynamicsExample)

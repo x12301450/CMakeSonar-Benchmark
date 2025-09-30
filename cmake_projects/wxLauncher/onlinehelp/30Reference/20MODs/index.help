@@ -1,0 +1,10 @@
+<title>Mods page</title>
+
+# Mods page
+
+This page allows you to [select a mod to activate][am]![][li] among the [mods][mod]![][li] installed for the current selected [TC][]![][li].
+
+[li]: /images/li.png
+[mod]: /50TechnicalStuff/02Terminology.help
+[tc]: /50TechnicalStuff/02Terminology.help
+[am]: activate.help

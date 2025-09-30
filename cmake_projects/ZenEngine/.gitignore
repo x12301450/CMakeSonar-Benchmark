@@ -1,0 +1,9 @@
+bin/
+lib/
+.vs/
+build/
+.idea/
+
+Data/SpvShaders
+Data/engine.cfg
+.DS_Store

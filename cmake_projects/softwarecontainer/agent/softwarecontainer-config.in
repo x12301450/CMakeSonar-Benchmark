@@ -1,0 +1,61 @@
+#
+# Copyright (C) 2016-2017 Pelagicore AB
+#
+# Permission to use, copy, modify, and/or distribute this software for
+# any purpose with or without fee is hereby granted, provided that the
+# above copyright notice and this permission notice appear in all copies.
+#
+# THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL
+# WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED
+# WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR
+# BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES
+# OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS,
+# WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION,
+# ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS
+# SOFTWARE.
+#
+# For further information see LICENSE
+
+#
+# General SoftwareContainer configuration.
+#
+# Optional configs are commented out by default, but are set to the default
+# values that will be used by SoftwareContainer if nothing else is specified.
+#
+# Any configs that are not commented out by default are mandatory and must
+# be present and set to a valid value by the user. The exception to this is
+# configs that have been asked to be set during CMake configuration for
+# convenience purposes. Configs like that will be present in this file while
+# not strictly mandatory. This is to enable some development and testing
+# convenience.
+#
+# Config keys are unique to their respective group. Consequently, the same
+# config key can appear in different groups. It is an error to move a config
+# from its group.
+#
+# Config groups that are not commented out are mandatory.
+#
+
+[SoftwareContainer]
+# Set to 'true' to use the SessionBus
+@SC_USE_SESSION_BUS_ACTIVATE@use-session-bus = @SC_USE_SESSION_BUS_CONFIG_FILE_VAR@
+
+# Timeout in seconds before containers are forcefully shut down
+@SC_SHUTDOWN_TIMEOUT_ACTIVATE@shutdown-timeout = @SC_SHUTDOWN_TIMEOUT_CONFIG_FILE_VAR@
+
+# Location for all shared host/container mounts
+@SC_SHARED_MOUNTS_DIR_ACTIVATE@shared-mounts-dir = @SC_SHARED_MOUNTS_DIR_CONFIG_FILE_VAR@
+
+# Path to the LXC configuration used with liblxc
+# NOTE: This option is being deprecated
+@SC_LXC_CONFIG_PATH_ACTIVATE@deprecated-lxc-config-path = @SC_LXC_CONFIG_PATH_CONFIG_FILE_VAR@
+
+# Path to where SoftwareContainer should read service manifests
+@SC_SERVICE_MANIFEST_DIR_ACTIVATE@service-manifest-dir = @SC_SERVICE_MANIFEST_DIR_CONFIG_FILE_VAR@
+
+# Path to where SoftwareContainer should read service manifests
+# that are to be automatically applied to containers by default,
+# e.g. when having "default capabilities" in the platform.
+@SC_DEFAULT_SERVICE_MANIFEST_DIR_ACTIVATE@default-service-manifest-dir = @SC_DEFAULT_SERVICE_MANIFEST_DIR_CONFIG_FILE_VAR@
+
+@SC_NETWORK_CONF_FILE@
