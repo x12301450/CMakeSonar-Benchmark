@@ -1,5 +1,5 @@
 {
-  "Path Issues":["cmake_projects/qaccordion/src/CMakeLists.txt:73",
+  "Invalid Operation":["cmake_projects/qaccordion/src/CMakeLists.txt:73",
   "cmake_projects/qaccordion/src/CMakeLists.txt:71",
   "cmake_projects/qaccordion/src/CMakeLists.txt:69",
   "cmake_projects/qaccordion/src/CMakeLists.txt:54",
@@ -123,7 +123,7 @@
   "cmake_projects/ogre/Samples/Emscripten/CMakeLists.txt:29",
   "cmake_projects/ogre/Samples/Emscripten/CMakeLists.txt:4"
 ],
-  "Illogical Variable Usage": ["cmake_projects/terarkdb/CMakeLists.txt:103",
+  "Type Mismatch": ["cmake_projects/terarkdb/CMakeLists.txt:103",
     "cmake_projects/csp-fork/csp/CMakeLists.txt:38",
     "cmake_projects/blending/src/utils/CMakeLists.txt:27",
     "cmake_projects/blending/src/blending/CMakeLists.txt:28",
